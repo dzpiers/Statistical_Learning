@@ -1,0 +1,24 @@
+
+Data file: "bankTD.csv" 
+
+Column	Variable	Description
+
+   ###Customer Characteristics
+A   	age 		age in years
+B   	job		type of job (categorical: "admin.","unknown","unemployed","management","housemaid","entrepreneur","student",
+                                       "blue-collar","self-employed","retired","technician","services") 
+C   	marital		marital status (categorical: "married","divorced","single"; note: "divorced" means divorced or widowed)
+D   	education 	education level (categorical: "unknown","secondary","primary","tertiary")
+E   	default		has credit in default? (binary: "yes","no")
+F   	balance		average yearly balance, in euros (numeric) 
+G   	housing		has housing loan? (binary: "yes","no")
+H   	loan		has personal loan? (binary: "yes","no")
+
+   ###Campaign Characteristics
+I   	duration	last contact duration, in seconds
+J   	previous	number of contacts performed before this campaign and for this client (numeric)
+K   	poutcome	outcome of the previous marketing campaign (categorical: "unknown","other","failure","success")
+
+   ###Output variable
+L   	y		has the client subscribed a term deposit? (binary: "yes","no")
+
