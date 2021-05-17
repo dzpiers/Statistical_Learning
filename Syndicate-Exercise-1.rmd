@@ -1,0 +1,113 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+Import Data & Split Categorical Data
+```{r}
+credit_data = read.csv(file='credit.csv', header=TRUE)
+credit_data
+
+credit_data$Gender=as.factor(credit_data$Gender)
+credit_data$Education=as.factor(credit_data$Education)
+credit_data$Student=as.factor(credit_data$Student)
+credit_data$Ethnicity=as.factor(credit_data$Ethnicity)
+credit_data$Married=as.factor(credit_data$Married)
+
+fit1 = lm(Balance~Income+Limit+Rating+Cards+Age+Education+Gender+Student+Married+Ethnicity,data=credit_data)
+summary(fit1)
+```
+
+Residual Plot
+```{r}
+plot(fit3$residuals,data=credit_data)
+abline(h=0)
+```
+
+Split Eduation Into Bins
+```{r}
+library(forcats)
+education_new=fct_collapse(credit_data$Education,"High School"=c("5","6","7","8","9","10","11","12"),"Bachelors"=c("13","14","15"),"Post-Grad"=c("16","17","18","19","20"))
+levels(education_new)
+```
+
+Run Regression with Education in Bins
+```{r}
+fit2 = lm(Balance~Income+Limit+Rating+Cards+Age+education_new+Gender+Student+Married+Ethnicity,data=credit_data)
+summary(fit2)
+```
+
+Run Regression excl. Gender, Education, Married, Ethnicity
+```{r}
+fit3 = lm(Balance~Income+Limit+Rating+Cards+Age+Student,data=credit_data)
+summary(fit3)
+```
+
+Run Regression with Rating^2
+```{r}
+fit4 = lm(Balance~Income+Limit+I(Rating^2)+Cards+Age+Student,data=credit_data)
+summary(fit4)
+```
+
+Wald Test Function
+```{r}
+library(MASS)
+wald<-function(R,B,S,c){
+  stats<-matrix(0,1,2)
+  dif=(R%*%B-c)
+  VV=R%*%(S)%*%t(R)
+  W=t(dif)%*%ginv(VV)%*%dif
+  stats[1]=W
+  stats[2]=pchisq(W,nrow(c),lower.tail=FALSE)
+  colnames(stats)<-c("Wald stat","p-value")
+  return(stats)
+}
+```
+
+Wald Test for Limit and Rating
+```{r}
+RR1=cbind(0,0,1,-1,0,0,0)
+cc1=rbind(0)
+bhat=(fit3$coefficients)
+Shat=vcov(fit3)
+wald1=wald(RR1,bhat,Shat,cc1)
+wald1
+```
+
+Residual Plots for All Fit
+```{r}
+#plot scatter of residuals of numerical data
+plot(fit3$residuals~Income,data=credit_data)
+abline(h=0)
+plot(fit3$residuals~Limit,data=credit_data)
+abline(h=0)
+plot(fit3$residuals~Rating,data=credit_data)
+abline(h=0)
+plot(fit3$residuals~Cards,data=credit_data)
+abline(h=0)
+```
