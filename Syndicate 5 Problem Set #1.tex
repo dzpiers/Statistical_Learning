@@ -1,0 +1,107 @@
+\documentclass[11pt]{article}
+\usepackage{dcolumn}
+\usepackage[left=25.4mm, top=1in, bottom=1in]{geometry}
+\begin{document}
+
+\title{Syndicate 5 Statistical Learning Problem Set \#1}
+\maketitle
+
+% Correlation Table
+\begin{table}[!htbp] \centering 
+  \caption{Correlation Matrix (numeric data only)} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}} ccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & Income & Limit & Rating & Cards & Age & Balance \\ 
+\hline \\[-1.8ex] 
+Income & $1$ & $0.792$ & $0.791$ & $$-$0.018$ & $0.175$ & $0.464$ \\ 
+Limit & $0.792$ & $1$ & $0.997$ & $0.010$ & $0.101$ & $0.862$ \\ 
+Rating & $0.791$ & $0.997$ & $1$ & $0.053$ & $0.103$ & $0.864$ \\ 
+Cards & $$-$0.018$ & $0.010$ & $0.053$ & $1$ & $0.043$ & $0.086$ \\ 
+Age & $0.175$ & $0.101$ & $0.103$ & $0.043$ & $1$ & $0.002$ \\ 
+Balance & $0.464$ & $0.862$ & $0.864$ & $0.086$ & $0.002$ & $1$ \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
+
+
+% Model Selection
+\begin{table}[!htbp] \centering 
+  \caption{Model Selection} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & \multicolumn{3}{c}{Balance} \\ 
+\\[-1.8ex] & (1) & (2) & (3)\\ 
+\hline \\[-1.8ex] 
+ Income & $-$6.550$^{***}$ & $-$6.610$^{***}$ & $-$6.350$^{***}$ \\ 
+  & (0.445) & (0.447) & (0.489) \\ 
+  & & & \\ 
+ I(Income$\hat{\mkern6mu}$2) & $-$0.020$^{***}$ & $-$0.020$^{***}$ & $-$0.021$^{***}$ \\ 
+  & (0.003) & (0.003) & (0.003) \\ 
+  & & & \\ 
+ Limit & 0.014 & 0.027 &  \\ 
+  & (0.053) & (0.053) &  \\ 
+  & & & \\ 
+ I(Limit$\hat{\mkern6mu}$2) & 0.00002$^{***}$ & 0.00002$^{***}$ &  \\ 
+  & (0.00000) & (0.00000) &  \\ 
+  & & & \\ 
+ Rating & 2.540$^{***}$ & 2.350$^{***}$ & 2.490$^{***}$ \\ 
+  & (0.867) & (0.862) & (0.137) \\ 
+  & & & \\ 
+ I(Rating$\hat{\mkern6mu}$2) & $-$0.002$^{**}$ & $-$0.002$^{**}$ & 0.002$^{***}$ \\ 
+  & (0.001) & (0.001) & (0.0002) \\ 
+  & & & \\ 
+ Cards & 25.800$^{**}$ & 17.900$^{***}$ & 2.520 \\ 
+  & (10.900) & (3.550) & (3.270) \\ 
+  & & & \\ 
+ I(Cards$\hat{\mkern6mu}$2) & $-$1.110 &  &  \\ 
+  & (1.440) &  &  \\ 
+  & & & \\ 
+ Age & 0.254 &  &  \\ 
+  & (1.600) &  &  \\ 
+  & & & \\ 
+ I(Age$\hat{\mkern6mu}$2) & $-$0.009 &  &  \\ 
+  & (0.014) &  &  \\ 
+  & & & \\ 
+ Edu\_BinsBachelors & 7.000 &  &  \\ 
+  & (9.760) &  &  \\ 
+  & & & \\ 
+ Edu\_BinsPost-Grad & $-$15.000 &  &  \\ 
+  & (10.000) &  &  \\ 
+  & & & \\ 
+ GenderFemale & $-$8.260 &  &  \\ 
+  & (8.080) &  &  \\ 
+  & & & \\ 
+ StudentYes & 442.000$^{***}$ & 441.000$^{***}$ & 429.000$^{***}$ \\ 
+  & (13.700) & (13.600) & (14.900) \\ 
+  & & & \\ 
+ MarriedYes & $-$6.130 &  &  \\ 
+  & (8.430) &  &  \\ 
+  & & & \\ 
+ EthnicityAsian & 16.900 & 19.000$^{*}$ & 21.300$^{*}$ \\ 
+  & (11.500) & (11.500) & (12.600) \\ 
+  & & & \\ 
+ EthnicityCaucasian & 17.000$^{*}$ & 17.400$^{*}$ & 14.200 \\ 
+  & (9.980) & (10.000) & (11.000) \\ 
+  & & & \\ 
+ Constant & $-$408.000$^{***}$ & $-$415.000$^{***}$ & $-$390.000$^{***}$ \\ 
+  & (56.200) & (36.800) & (25.500) \\ 
+  & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 400 & 400 & 400 \\ 
+R$^{2}$ & 0.971 & 0.970 & 0.963 \\ 
+Adjusted R$^{2}$ & 0.970 & 0.969 & 0.963 \\ 
+Residual Std. Error & 80.100 (df = 382) & 81.100 (df = 389) & 88.900 (df = 391) \\ 
+F Statistic & 750.000$^{***}$ (df = 17; 382) & 1,243.000$^{***}$ (df = 10; 389) & 1,285.000$^{***}$ (df = 8; 391) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+\end{document}
