@@ -26,11 +26,9 @@ reg2 <- lm(Balance~Income+Limit+Rating+Cards+Age+Edu_Bins+Gender+Student+Married
 summary(reg2)
 
 ## Residual plots to check for multicollinearity
-png(filename = "Residual Plots.png", width=1500, height=1000)
-par(mfrow=c(2,3))
+png(filename = "Residual Plots.png", width=1000, height=1000)
+par(mfrow=c(2,2))
 plot(reg2$residuals~Income,data=credit)
-abline(h=0)
-plot(reg2$residuals~Limit,data=credit)
 abline(h=0)
 plot(reg2$residuals~Rating,data=credit)
 abline(h=0)
@@ -66,7 +64,7 @@ cc1 <- rbind(0)
 bhat <- (reg2$coefficients)
 Shat <- vcov(reg2)
 wald1 <- wald(RR1,bhat,Shat,cc1)
-stargazer(wald1)
+stargazer(wald1, title="Wald Test for Rating and Limit")
 
 ## Wald test for Income and Rating
 RR1 <- cbind(0,1,0,-1,0,0,0,0,0,0,0,0,0)
@@ -77,7 +75,7 @@ wald2 <- wald(RR1,bhat,Shat,cc1)
 stargazer(wald2)
 
 ## Losing Limit and adding squared terms for Income and Rating
-reg3 <- lm(Balance~Income+I(Income^2)+Rating+I(Rating^2)+Age+Edu_Bins+Gender+Student+Married+Ethnicity,data=credit)
+reg3 <- lm(Balance~Income+I(Income^2)+Rating+I(Rating^2)+Cards+Age+Edu_Bins+Gender+Student+Married+Ethnicity,data=credit)
 summary(reg3)
 
 ## Losing insignificant variables
