@@ -7,6 +7,24 @@
 \title{Syndicate 5 Statistical Learning Problem Set \#1}
 \maketitle
 \pagenumbering{gobble}
+{\setlength{\parindent}{0cm}
+
+
+\section*{Question 3}
+Our first model is the same as Q2 except with the $Education$ variable now grouped into three bins based on the likely degree attained. This is to make the regression easier to interpret. The resultant regression is quite good with an Adjusted $R^2$ of 0.954 but we still have many insignificant predictors. However, before removing these, we want to use the second model to avoid any of the common pitfalls of regression.\\
+
+Looking at a correlation matrix of numeric variables, we can see that $Rating$ and $Limit$ are extremely highly correlated and may give us multicollinearity issues. We conducted a Wald test to see if these predictors are jointly useful in predicting $Balance$. 
+$$H_0: \beta_{Rating} = \beta_{Limit}$$
+$$H_1: \beta_{Rating} \neq \beta_{Limit}$$
+
+The Wald test gives us a p-value of 0.062 which is not enough evidence to suggest that coefficients for $Rating$ and $Limit$ are jointly useful (at the 5\% level). We decided to keep $Rating$ and drop $Limit$ for our second model since it is more likely to dictate the value for each $Limit$ than vice versa, and thus more useful.\\
+
+Before constructing our second model, we first looked at the residuals from Q2 and we see some non-linear patterns in $Income$ and $Rating$ so we chose to include squared terms for our second model. We considered the possibility of interaction terms for this regression however, we couldn't see any likely case the effect of a statistically significant independent variable on the dependent variable would depend on another (statistically significant) independent variable. This model is again quite good with an Adjusted $R^2$ of 0.963, and our new terms being statistically significant (interestingly, with the omission of $Limit$, $Cards$ is no longer statistically significant), but we still have many insignificant coefficients which we can drop to simplify the regression at little cost to accuracy.\\
+
+Thus our third model only has significant terms (all significant at the 1\% level) and maintains the same very high Adjusted $R^2$ of 0.963 with the Residual Std. Error only increasing slightly (88.081 to 88.218). While both model 2 and 3 have similar accuracy, model 3 is preferred due to having fewer terms and thus being easier to interpret.\\
+
+\centering
+Final Model: $Balance_i = -329.576 - 6.238Income_i -0.021Income_i^2 + 2.471Rating_i + 0.002Rating^2_i - 0.0729Age_i + 428.341Student_i$
 
 % Correlation Table
 \begin{table}[!htbp] \centering 
@@ -30,7 +48,7 @@ Balance & $0.464$ & $0.862$ & $0.864$ & $0.086$ & $0.002$ & $1$ \\
 
 % Wald Test for Rating and Income
 \begin{table}[!htbp] \centering 
-  \caption{} 
+  \caption{Wald Test for Rating and Limit} 
   \label{} 
 \begin{tabular}{@{\extracolsep{5pt}} cc} 
 \\[-1.8ex]\hline 
@@ -42,19 +60,10 @@ $3.487$ & $0.062$ \\
 \end{tabular} 
 \end{table} 
 
-% Wald Test for Income and Rating
-\begin{table}[!htbp] \centering 
-  \caption{} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}} cc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
-Wald stat & p-value \\ 
-\hline \\[-1.8ex] 
-$259.208$ & $0$ \\ 
-\hline \\[-1.8ex] 
-\end{tabular} 
-\end{table} 
+\centering
+\subsection*{Residual Plots}
+\includegraphics[scale=0.45]{Residual Plots}
+
 
 % Model Selection
 \begin{table}[!htbp] \centering 
@@ -69,8 +78,8 @@ $259.208$ & $0$ \\
 \\[-1.8ex] & \multicolumn{3}{c}{Balance} \\ 
 \\[-1.8ex] & (1) & (2) & (3)\\ 
 \hline \\[-1.8ex] 
- Income & $-$7.816$^{***}$ & $-$6.312$^{***}$ & $-$6.238$^{***}$ \\ 
-  & (0.235) & (0.486) & (0.486) \\ 
+ Income & $-$7.816$^{***}$ & $-$6.283$^{***}$ & $-$6.238$^{***}$ \\ 
+  & (0.235) & (0.488) & (0.486) \\ 
   & & & \\ 
  Limit & 0.189$^{***}$ &  &  \\ 
   & (0.033) &  &  \\ 
@@ -78,53 +87,54 @@ $259.208$ & $0$ \\
  I(Income$\hat{\mkern6mu}$2) &  & $-$0.021$^{***}$ & $-$0.021$^{***}$ \\ 
   &  & (0.003) & (0.003) \\ 
   & & & \\ 
- Rating & 1.166$^{**}$ & 2.482$^{***}$ & 2.471$^{***}$ \\ 
+ Rating & 1.166$^{**}$ & 2.481$^{***}$ & 2.471$^{***}$ \\ 
   & (0.491) & (0.136) & (0.136) \\ 
-  & & & \\ 
- Cards & 17.760$^{***}$ &  &  \\ 
-  & (4.346) &  &  \\ 
   & & & \\ 
  I(Rating$\hat{\mkern6mu}$2) &  & 0.002$^{***}$ & 0.002$^{***}$ \\ 
   &  & (0.0002) & (0.0002) \\ 
   & & & \\ 
- Age & $-$0.598$^{**}$ & $-$0.702$^{***}$ & $-$0.729$^{***}$ \\ 
-  & (0.295) & (0.262) & (0.261) \\ 
+ Cards & 17.760$^{***}$ & 2.825 &  \\ 
+  & (4.346) & (3.255) &  \\ 
   & & & \\ 
- Edu\_BinsBachelors & 6.884 & 5.168 &  \\ 
-  & (11.901) & (10.579) &  \\ 
+ Age & $-$0.598$^{**}$ & $-$0.714$^{***}$ & $-$0.729$^{***}$ \\ 
+  & (0.295) & (0.263) & (0.261) \\ 
   & & & \\ 
- Edu\_BinsPost-Grad & $-$5.565 & $-$10.154 &  \\ 
-  & (12.329) & (10.976) &  \\ 
+ Edu\_BinsBachelors & 6.884 & 5.757 &  \\ 
+  & (11.901) & (10.604) &  \\ 
   & & & \\ 
- GenderFemale & $-$10.894 & $-$9.313 &  \\ 
-  & (9.925) & (8.839) &  \\ 
+ Edu\_BinsPost-Grad & $-$5.565 & $-$9.563 &  \\ 
+  & (12.329) & (11.000) &  \\ 
   & & & \\ 
- StudentYes & 426.109$^{***}$ & 428.894$^{***}$ & 428.341$^{***}$ \\ 
-  & (16.774) & (14.914) & (14.755) \\ 
+ GenderFemale & $-$10.894 & $-$9.118 &  \\ 
+  & (9.925) & (8.845) &  \\ 
   & & & \\ 
- MarriedYes & $-$8.535 & $-$12.452 &  \\ 
-  & (10.361) & (9.192) &  \\ 
+ StudentYes & 426.109$^{***}$ & 429.092$^{***}$ & 428.341$^{***}$ \\ 
+  & (16.774) & (14.920) & (14.755) \\ 
   & & & \\ 
- EthnicityAsian & 15.965 & 20.495 &  \\ 
-  & (14.157) & (12.588) &  \\ 
+ MarriedYes & $-$8.535 & $-$12.380 &  \\ 
+  & (10.361) & (9.195) &  \\ 
   & & & \\ 
- EthnicityCaucasian & 10.027 & 13.910 &  \\ 
-  & (12.217) & (10.898) &  \\ 
+ EthnicityAsian & 15.965 & 20.348 &  \\ 
+  & (14.157) & (12.593) &  \\ 
   & & & \\ 
- Constant & $-$497.360$^{***}$ & $-$330.930$^{***}$ & $-$329.576$^{***}$ \\ 
-  & (29.040) & (29.526) & (26.542) \\ 
+ EthnicityCaucasian & 10.027 & 13.903 &  \\ 
+  & (12.217) & (10.902) &  \\ 
+  & & & \\ 
+ Constant & $-$497.360$^{***}$ & $-$339.084$^{***}$ & $-$329.576$^{***}$ \\ 
+  & (29.040) & (30.994) & (26.542) \\ 
   & & & \\ 
 \hline \\[-1.8ex] 
 Observations & 400 & 400 & 400 \\ 
 R$^{2}$ & 0.955 & 0.964 & 0.964 \\ 
 Adjusted R$^{2}$ & 0.954 & 0.963 & 0.963 \\ 
-Residual Std. Error & 98.853 (df = 387) & 88.052 (df = 387) & 88.218 (df = 393) \\ 
-F Statistic & 686.991$^{***}$ (df = 12; 387) & 874.252$^{***}$ (df = 12; 387) & 1,740.723$^{***}$ (df = 6; 393) \\ 
+Residual Std. Error & 98.853 (df = 387) & 88.081 (df = 386) & 88.218 (df = 393) \\ 
+F Statistic & 686.991$^{***}$ (df = 12; 387) & 806.545$^{***}$ (df = 13; 386) & 1,740.723$^{***}$ (df = 6; 393) \\ 
 \hline 
 \hline \\[-1.8ex] 
 \textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
 \end{tabular}
-} 
+}
 \end{table} 
 
+}
 \end{document}
