@@ -1,8 +1,11 @@
- ## Loading in stargazer
+ ## Loading in packages
 library(stargazer)
 library(forcats)
 library(MASS)
+library(stats4)
 options(scipen=2)
+
+## Week 1
 ## Reading in the data
 credit <- read.csv("credit.csv", header = TRUE, sep=",")
 
@@ -16,6 +19,7 @@ credit$Ethnicity <- as.factor(credit$Ethnicity)
 ## Results from Question 2
 reg1 <- lm(Balance~Income+Limit+Rating+Cards+Age+Education+Gender+Student+Married+Ethnicity,data=credit)
 summary(reg1)
+stargazer(reg1, title="Multiple Linear Regression")
 
 ## Splitting education into bins
 Edu_Bins <- fct_collapse(credit$Education,"High School"=c("5","6","7","8","9","10","11","12"),"Bachelors"=c("13","14","15"),"Post-Grad"=c("16","17","18","19","20"))
@@ -28,20 +32,20 @@ summary(reg2)
 ## Residual plots to check for multicollinearity
 png(filename = "Residual Plots.png", width=1000, height=1000)
 par(mfrow=c(2,2))
-plot(reg2$residuals~Income,data=credit)
+plot(reg2$residuals~Income,data=credit, cex.lab=1.5)
 abline(h=0)
-plot(reg2$residuals~Rating,data=credit)
+plot(reg2$residuals~Rating,data=credit, cex.lab=1.5)
 abline(h=0)
-plot(reg2$residuals~Cards,data=credit)
+plot(reg2$residuals~Cards,data=credit, cex.lab=1.5)
 abline(h=0)
-plot(reg2$residuals~Age,data=credit)
+plot(reg2$residuals~Age,data=credit, cex.lab=1.5)
 abline(h=0)
 dev.off()
 
 ## Correlation matrix
 credit_num <- credit[,c(2:6, 12)]
 credit_cor <- cor(credit_num)
-stargazer(credit_cor, title='Correlation Matrix (numeric data only)')x
+stargazer(credit_cor, title='Correlation Matrix (numeric data only)')
 
 ## Correlation between Rating and Limit
 cor(credit$Rating, credit$Limit)
@@ -83,6 +87,32 @@ reg4 <- lm(Balance~Income+I(Income^2)+Rating+I(Rating^2)+Age+Student,data=credit
 summary(reg4)
 
 ## Stargazer output
-stargazer(reg2, reg3, reg4,  title="Model Selection")
+stargazer(reg2, reg3, reg4,  title="Model Selection", table.placement = "H")
 
 
+## Week 2
+## Loading in the data
+bank <- read.csv("bankTD.csv")
+
+## Changing relevant variables to factor variables
+bank$job <- as.factor(bank$job)
+bank$marital <- as.factor(bank$marital)
+bank$education <- as.factor(bank$education)
+bank$default <- as.factor(bank$default)
+bank$housing <- as.factor(bank$housing)
+bank$loan <- as.factor(bank$loan)
+bank$poutcome <- as.factor(bank$poutcome)
+bank$y <- as.factor(bank$y)
+
+
+#Fitting the logistic model using MLE.
+#The likelihood function definition.
+LL_logistic<-function(beta0,beta1){
+  xb=beta0+beta1*bank$duration
+  lpy=bank$y*log(exp(xb)/(1+exp(xb)))+(1-bank$y)*log(1/(1+exp(xb)))
+  -sum(lpy)
+}
+
+#Implementing the MLE
+mle_logistic <- mle(minuslogl = LL_logistic, start = list(beta0=0, beta1=0), method = "BFGS")
+summary(mle_logistic)

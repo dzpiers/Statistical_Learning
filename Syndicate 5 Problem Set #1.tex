@@ -2,6 +2,9 @@
 \usepackage{dcolumn}
 \usepackage[left=1in, top=1in, bottom=1in]{geometry}
 \usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{longtable}
+\usepackage{float}
 \begin{document}
 
 \title{Syndicate 5 Statistical Learning Problem Set \#1}
@@ -10,7 +13,117 @@
 {\setlength{\parindent}{0cm}
 
 
-\section*{Question 3}
+\section*{Credit Card Balances}
+\subsection*{Question 1}
+The expected relationship roughly shows the common sense and logical judgement about the potential relationship between the credit card balance and independent parameters.\\
+
+It is assumed that the credit limit, rating, cards on hand, user’s age and the identity of student could be the main factors that affect the balance of the credit card, which is shown in the following table. Based on these assumptions, detailed regression analysis will be conducted and explained in the following paragraphs. 
+
+
+\subsection*{Question 2}
+A multiple linear regression was run with all possible predictors holding ‘balance’ as the outcome and other variables as predictors. Predictors ‘gender’, ‘student’, ‘married’, and ‘ethnicity’ were assumed to be categorical with associated dummy variables created for each predictor.\\ 
+
+Using R, the following coefficients in Table 1 were estimated.
+\begin{longtable}{@{\extracolsep{5pt}}lc} 
+  \caption{Multiple Linear Regression} 
+  \label{} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & Balance \\ 
+\hline \\[-1.8ex] 
+ Income & $-$7.718$^{***}$ \\ 
+  & (0.241) \\ 
+  & \\ 
+ Limit & 0.189$^{***}$ \\ 
+  & (0.033) \\ 
+  & \\ 
+ Rating & 1.150$^{**}$ \\ 
+  & (0.498) \\ 
+  & \\ 
+ Cards & 17.720$^{***}$ \\ 
+  & (4.413) \\ 
+  & \\ 
+ Age & $-$0.558$^{*}$ \\ 
+  & (0.302) \\ 
+  & \\ 
+ Education6 & $-$51.878 \\ 
+  & (109.201) \\ 
+  & \\ 
+ Education7 & $-$45.627 \\ 
+  & (105.953) \\ 
+  & \\ 
+ Education8 & $-$66.490 \\ 
+  & (103.493) \\ 
+  & \\ 
+ Education9 & $-$7.671 \\ 
+  & (101.730) \\ 
+  & \\ 
+ Education10 & $-$21.790 \\ 
+  & (101.753) \\ 
+  & \\ 
+ Education11 & $-$63.956 \\ 
+  & (101.285) \\ 
+  & \\ 
+ Education12 & $-$42.985 \\ 
+  & (100.883) \\ 
+  & \\ 
+ Education13 & $-$43.381 \\ 
+  & (101.073) \\ 
+  & \\ 
+ Education14 & $-$23.939 \\ 
+  & (100.841) \\ 
+  & \\ 
+ Education15 & $-$36.608 \\ 
+  & (100.715) \\ 
+  & \\ 
+ Education16 & $-$30.359 \\ 
+  & (100.698) \\ 
+  & \\ 
+ Education17 & $-$44.087 \\ 
+  & (101.368) \\ 
+  & \\ 
+ Education18 & $-$79.711 \\ 
+  & (101.868) \\ 
+  & \\ 
+ Education19 & $-$44.960 \\ 
+  & (104.458) \\ 
+  & \\ 
+ Education20 & $-$97.893 \\ 
+  & (122.352) \\ 
+  & \\ 
+ GenderFemale & $-$7.589 \\ 
+  & (10.058) \\ 
+  & \\ 
+ StudentYes & 422.261$^{***}$ \\ 
+  & (17.057) \\ 
+  & \\ 
+ MarriedYes & $-$8.585 \\ 
+  & (10.528) \\ 
+  & \\ 
+ EthnicityAsian & 16.147 \\ 
+  & (14.463) \\ 
+  & \\ 
+ EthnicityCaucasian & 9.846 \\ 
+  & (12.445) \\ 
+  & \\ 
+ Constant & $-$457.639$^{***}$ \\ 
+  & (104.087) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 400 \\ 
+R$^{2}$ & 0.957 \\ 
+Adjusted R$^{2}$ & 0.954 \\ 
+Residual Std. Error & 99.037 (df = 374) \\ 
+F Statistic & 328.993$^{***}$ (df = 25; 374) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{longtable} 
+ 
+
+\subsection*{Question 3}
 Our first model is the same as Q2 except with the $Education$ variable now grouped into three bins based on the likely degree attained. This is to make the regression easier to interpret. The resultant regression is quite good with an Adjusted $R^2$ of 0.954 but we still have many insignificant predictors. However, before removing these, we want to use the second model to avoid any of the common pitfalls of regression.\\
 
 Looking at a correlation matrix of numeric variables, we can see that $Rating$ and $Limit$ are extremely highly correlated and may give us multicollinearity issues. We conducted a Wald test to see if these predictors are jointly useful in predicting $Balance$. 
@@ -23,8 +136,9 @@ Before constructing our second model, we first looked at the residuals from Q2 a
 
 Thus our third model only has significant terms (all significant at the 1\% level) and maintains the same very high Adjusted $R^2$ of 0.963 with the Residual Std. Error only increasing slightly (88.081 to 88.218). While both model 2 and 3 have similar accuracy, model 3 is preferred due to having fewer terms and thus being easier to interpret.\\
 
-\centering
+\begin{center}
 Final Model: $Balance_i = -329.576 - 6.238Income_i -0.021Income_i^2 + 2.471Rating_i + 0.002Rating^2_i - 0.0729Age_i + 428.341Student_i$
+\end{center}
 
 % Correlation Table
 \begin{table}[!htbp] \centering 
@@ -45,7 +159,6 @@ Balance & $0.464$ & $0.862$ & $0.864$ & $0.086$ & $0.002$ & $1$ \\
 \end{tabular} 
 \end{table} 
 
-
 % Wald Test for Rating and Income
 \begin{table}[!htbp] \centering 
   \caption{Wald Test for Rating and Limit} 
@@ -60,13 +173,15 @@ $3.487$ & $0.062$ \\
 \end{tabular} 
 \end{table} 
 
-\centering
-\subsection*{Residual Plots}
+
+\subsubsection*{Residual Plots}
+\begin{center}
 \includegraphics[scale=0.45]{Residual Plots}
+\end{center}
 
 
 % Model Selection
-\begin{table}[!htbp] \centering 
+\begin{table}[H] \centering 
   \caption{Model Selection} 
   \label{} 
 \resizebox{15.92cm}{!}{
@@ -132,9 +247,20 @@ F Statistic & 686.991$^{***}$ (df = 12; 387) & 806.545$^{***}$ (df = 13; 386) & 
 \hline 
 \hline \\[-1.8ex] 
 \textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-\end{tabular}
+\end{tabular} 
 }
-\end{table} 
+\end{table}
+
+
+\section*{Bank's Marketing Success}
+\subsection*{Question 2.1}
+$$Pr(y_i = 1|duration_i) = \frac{\exp(\beta_0+\beta_1dist_i)}{1+\exp(\beta_0+\beta_1dist_i)}$$ 
+$$Pr(y_i = 0|duration_i) = \frac{1}{1+\exp(\beta_0+\beta_1dist_i)}$$ 
+
+
+\subsection*{Question 2.2}
+$$\ell(\beta|\mathbf{y},\mathbf{X}) = \sum\limits_{i=1}^n \left[ y_i \ln{\left( \frac{\exp(\beta_0+\beta_1dist_i)}{1+\exp(\beta_0+\beta_1dist_i)}\right)} + (1-y_i) \ln{\left( \frac{1}{1+\exp(\beta_0+\beta_1dist_i)}\right)}\right]$$
+
 
 }
 \end{document}
