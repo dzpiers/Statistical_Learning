@@ -3,6 +3,8 @@ library(stargazer)
 library(forcats)
 library(MASS)
 library(stats4)
+library(readr)
+library(boot)
 options(scipen=2)
 
 ## Week 1
@@ -92,7 +94,7 @@ stargazer(reg2, reg3, reg4,  title="Model Selection", table.placement = "H")
 
 ## Week 2
 ## Loading in the data
-bank <- read.csv("bankTD.csv")
+bank <- read.csv("bankTD.csv", header = TRUE, sep=",")
 
 ## Changing relevant variables to factor variables
 bank$job <- as.factor(bank$job)
@@ -107,6 +109,7 @@ bank$y <- as.factor(bank$y)
 
 #Fitting the logistic model using MLE.
 #The likelihood function definition.
+#The likelihood function definition.
 LL_logistic<-function(beta0,beta1){
   xb=beta0+beta1*bank$duration
   lpy=bank$y*log(exp(xb)/(1+exp(xb)))+(1-bank$y)*log(1/(1+exp(xb)))
@@ -114,5 +117,5 @@ LL_logistic<-function(beta0,beta1){
 }
 
 #Implementing the MLE
-mle_logistic <- mle(minuslogl = LL_logistic, start = list(beta0=0, beta1=0), method = "BFGS")
+mle_logistic=mle(minuslogl = LL_logistic, start = list(beta0=0, beta1=0), method = "BFGS")
 summary(mle_logistic)
