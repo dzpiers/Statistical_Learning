@@ -96,6 +96,37 @@ stargazer(reg2, reg3, reg4,  title="Model Selection", table.placement = "H")
 ## Loading in the data
 bank <- read.csv("bankTD.csv", header = TRUE, sep=",")
 
+## Fitting the logistic model using MLE.
+## The likelihood function definition.
+LL_logistic<-function(beta0,beta1){
+  xb=beta0+beta1*bank$duration
+  lpy=bank$y*log(exp(xb)/(1+exp(xb)))+(1-bank$y)*log(1/(1+exp(xb)))
+  -sum(lpy)
+}
+
+## Implementing the MLE
+mle_logistic <- mle(minuslogl = LL_logistic, start = list(beta0=0, beta1=0), method = "BFGS")
+summary(mle_logistic)
+
+## Using the glm function
+fit1 <- glm(y~duration,binomial(link="logit"),data=bank)
+summary(fit1)
+
+## Odds for duration (note: results zoomed in on for clarity)
+odds_HH <- exp(fit1$linear.predictors)
+par(mfrow=c(1,2))
+boxplot(odds_HH,main="Odds ratio for y",ylab="Odds ratio",ylim=c(0,10))
+abline(h=1,col="red",lty=2)
+plot(bank$duration,odds_HH,main="Odds ratio to y vs duration",xlab="duration",ylab="Odds ratio",ylim=c(0,10))
+abline(h=1,col="red",lty=2)
+
+## Post fit analysis
+exb <- exp(predict(fit1,newdata=data.frame(duration=500)))
+ME <- fit1$coefficients[2]*exb/((1+exb)^2)
+ME*(-450)
+Deltap <- predict(fit1,newdata=data.frame(duration=50),type="response")-predict(fit1,newdata=data.frame(duration=500),type="response")
+Deltap
+
 ## Changing relevant variables to factor variables
 bank$job <- as.factor(bank$job)
 bank$marital <- as.factor(bank$marital)
@@ -104,18 +135,8 @@ bank$default <- as.factor(bank$default)
 bank$housing <- as.factor(bank$housing)
 bank$loan <- as.factor(bank$loan)
 bank$poutcome <- as.factor(bank$poutcome)
-bank$y <- as.factor(bank$y)
 
+## GLM with multiple predictors
+fit2 <- glm(y~age+job+marital+education+default+balance+housing+loan+duration+previous+poutcome,binomial(link="logit"),data=bank)
+summary(fit2)
 
-#Fitting the logistic model using MLE.
-#The likelihood function definition.
-#The likelihood function definition.
-LL_logistic<-function(beta0,beta1){
-  xb=beta0+beta1*bank$duration
-  lpy=bank$y*log(exp(xb)/(1+exp(xb)))+(1-bank$y)*log(1/(1+exp(xb)))
-  -sum(lpy)
-}
-
-#Implementing the MLE
-mle_logistic=mle(minuslogl = LL_logistic, start = list(beta0=0, beta1=0), method = "BFGS")
-summary(mle_logistic)
