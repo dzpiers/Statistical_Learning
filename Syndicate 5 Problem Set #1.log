@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.5.17)  31 MAY 2021 18:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.5.17)  31 MAY 2021 20:44
 entering extended mode
 **"./Syndicate 5 Problem Set #1.tex"
 ("Syndicate 5 Problem Set #1.tex"
@@ -192,6 +192,15 @@ LaTeX Warning: Label `' multiply defined.
 
 LaTeX Warning: Label `' multiply defined.
 
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
 )
 \openout1 = `"Syndicate 5 Problem Set #1.aux"'.
 
@@ -283,157 +292,208 @@ Underfull \hbox (badness 10000) in paragraph at lines 38--39
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 40--41
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--43
+
+ []
+
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 50.
+(Font)              <10.95> on input line 47.
+
+Underfull \hbox (badness 10000) in paragraph at lines 47--48
+
+ []
+
 [1
 
-{C:/Users/dhruv/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2]
-Underfull \hbox (badness 10000) in paragraph at lines 141--142
+{C:/Users/dhruv/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 53--54
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--148
+Underfull \hbox (badness 10000) in paragraph at lines 55--56
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 149--150
+Underfull \hbox (badness 10000) in paragraph at lines 57--58
 
  []
 
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 151--152
-
- []
-
-<Residual Plots.png, id=21, 1003.75pt x 1003.75pt>
+<Residual Plots.png, id=11, 1003.75pt x 1003.75pt>
 File: Residual Plots.png Graphic file (type png)
 <use Residual Plots.png>
-Package pdftex.def Info: Residual Plots.png  used on input line 193.
+Package pdftex.def Info: Residual Plots.png  used on input line 99.
 (pdftex.def)             Requested size: 451.68333pt x 451.68333pt.
 
-Overfull \hbox (1.80351pt too wide) in paragraph at lines 193--194
+Overfull \hbox (1.80351pt too wide) in paragraph at lines 99--100
  [] 
  []
 
-[4]
-Overfull \hbox (3.09464pt too wide) in paragraph at lines 201--266
- [][] 
- []
-
-[5 <./Residual Plots.png>]
-Overfull \vbox (39.56636pt too high) has occurred while \output is active []
-
-
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 269--270
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 105--106
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 271--272
+Underfull \hbox (badness 10000) in paragraph at lines 107--108
+
+ []
+
+[3 <./Residual Plots.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 109--110
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--274
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 275--276
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 277--278
-
+Overfull \hbox (4.47466pt too wide) detected at line 119
+\OML/cmm/m/it/10.95 `\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 \OMS/cmsy/m/n/10.
+95 j\OT1/cmr/bx/n/10.95 y\OML/cmm/m/it/10.95 ; \OT1/cmr/bx/n/10.95 X\OT1/cmr/m/
+n/10.95 ) = [] []
  []
 
 LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
-303.
+133.
 ("C:\Program Files\MiKTeX\tex/latex/base\ts1cmtt.fd"
 File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-) [7]
-Underfull \hbox (badness 10000) in paragraph at lines 349--350
+) [4]
+Underfull \hbox (badness 10000) in paragraph at lines 180--181
 
  []
 
-<Odds.png, id=40, 963.6pt x 963.6pt>
+<Odds.png, id=28, 963.6pt x 963.6pt>
 File: Odds.png Graphic file (type png)
 <use Odds.png>
-Package pdftex.def Info: Odds.png  used on input line 357.
-(pdftex.def)             Requested size: 433.616pt x 433.616pt.
+Package pdftex.def Info: Odds.png  used on input line 189.
+(pdftex.def)             Requested size: 337.26506pt x 337.26506pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 357--358
-
- []
-
-[8] [9 <./Odds.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 369--370
+Underfull \hbox (badness 10000) in paragraph at lines 189--190
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 380--381
-
- []
-
-[10] [11]
-Underfull \hbox (badness 10000) in paragraph at lines 482--483
+[5] [6 <./Odds.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 202--203
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 484--485
+Underfull \hbox (badness 10000) in paragraph at lines 213--214
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 486--487
+Underfull \hbox (badness 10000) in paragraph at lines 215--216
 
  []
 
-[12] [13] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 642--643
+
+Underfull \hbox (badness 10000) in paragraph at lines 217--218
 
  []
 
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 644--646
+
+Underfull \hbox (badness 10000) in paragraph at lines 220--221
 
  []
 
-[16] ("Syndicate 5 Problem Set #1.aux")
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 236--237
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 246--247
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 248--249
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 252--253
+
+ []
+
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 261--262
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 280--281
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 290--291
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 307--308
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 309--310
+
+ []
+
+[9] [10]
+Overfull \vbox (60.76903pt too high) has occurred while \output is active []
+
+
+[11]
+Overfull \hbox (3.09464pt too wide) in paragraph at lines 455--520
+ [][] 
+ []
+
+
+Overfull \vbox (39.56636pt too high) has occurred while \output is active []
+
+
+[12]
+Overfull \vbox (35.7456pt too high) has occurred while \output is active []
+
+
+[13] [14] ("Syndicate 5 Problem Set #1.aux")
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
  4858 strings out of 479624
- 64629 string characters out of 2875023
- 553217 words of memory out of 3000000
- 21997 multiletter control sequences out of 15000+200000
- 410033 words of font info for 49 fonts, out of 3000000 for 9000
+ 64653 string characters out of 2875023
+ 573217 words of memory out of 3000000
+ 21996 multiletter control sequences out of 15000+200000
+ 410374 words of font info for 50 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,12n,70p,845b,2370s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\dhruv\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tctt
-1000.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/
-Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program File
-s/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX/fon
-ts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/
-cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-<C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program F
-iles/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX/fo
-nts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts
-/cm/cmti10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.p
-fb>
-Output written on "Syndicate 5 Problem Set #1.pdf" (16 pages, 210617 bytes).
+ 66i,12n,70p,845b,2084s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\dhruv\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
+1095.pk> <C:\Users\dhruv\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
+0\tctt1000.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pf
+b><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Progra
+m Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKT
+eX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/typ
+e1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr1
+2.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Pro
+gram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/ty
+pe1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+tt10.pfb>
+Output written on "Syndicate 5 Problem Set #1.pdf" (14 pages, 219067 bytes).
 PDF statistics:
- 115 PDF objects out of 1000 (max. 8388607)
+ 114 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

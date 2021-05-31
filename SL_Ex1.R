@@ -151,6 +151,17 @@ fit2 <- glm(y~age+job+marital+education+default+balance+housing+loan+duration+pr
 summary(fit2)
 stargazer(fit2, title = "Multiple Logistic Regression")
 
+## Deviance and AIC comparison
+dev_aic <- matrix(1:6, 2, 3)
+dev_aic[1,1] <- fit1$null.deviance
+dev_aic[2,1] <- fit1$null.deviance + 2
+dev_aic[1,2] <- fit1$deviance
+dev_aic[2,2] <- fit1$aic
+dev_aic[1,3] <- fit2$deviance
+dev_aic[2,3] <- fit2$aic
+rownames(dev_aic) <- c("Deviance", "AIC")
+colnames(dev_aic) <- c("Null", "Single Predictor", "Multiple Predictors")
+stargazer(dev_aic)
 
 
 ## Question 6
@@ -167,6 +178,20 @@ summary(fit4)
 fit5 <- glm(y~job+education+default+balance+housing+loan+duration+I(duration^2)+poutcome+previous:housing,binomial(link="logit"),data=bank)
 summary(fit5)
 stargazer(fit3, fit4, fit5, title = "Model Selection")
+
+## Selection process
+sel_pro <- matrix(1:8,2,4)
+sel_pro[1,1] <- fit3$null.deviance
+sel_pro[2,1] <- fit3$null.deviance + 2
+sel_pro[1,2] <- fit3$deviance
+sel_pro[2,2] <- fit3$aic
+sel_pro[1,3] <- fit4$deviance
+sel_pro[2,3] <- fit4$aic
+sel_pro[1,4] <- fit5$deviance
+sel_pro[2,4] <- fit5$aic
+colnames(sel_pro) <- c("Null", "Model (1)", "Model (2)", "Model (3)")
+rownames(sel_pro) <- c("Deviance", "AIC")
+stargazer(sel_pro)
 
 ## LR Test
 LR1 <- fit5$null.deviance-fit3$deviance
@@ -188,6 +213,9 @@ HitMiss<-function(y,prob,c){
 probs1 <- fit5$fitted.values
 
 HM1 <- HitMiss(bank$y,probs1,0.5)
+colnames(HM1) <- c("yhat = 1", "yhat = 0")
+rownames(HM1) <- c("y=1", "y=0")
+stargazer(HM1)
 
 sum(diag(HM1))
 1-sum(diag(HM1))
