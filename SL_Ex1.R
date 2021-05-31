@@ -92,6 +92,7 @@ summary(reg4)
 stargazer(reg2, reg3, reg4,  title="Model Selection", table.placement = "H")
 
 
+
 ## Week 2
 ## Loading in the data
 bank <- read.csv("bankTD.csv", header = TRUE, sep=",")
@@ -105,20 +106,26 @@ LL_logistic<-function(beta0,beta1){
 }
 
 ## Implementing the MLE
-mle_logistic <- mle(minuslogl = LL_logistic, start = list(beta0=0, beta1=0), method = "BFGS")
+mle_logistic <- mle(minuslogl = LL_logistic, 
+                    start = list(beta0=0, beta1=0), method = "BFGS")
 summary(mle_logistic)
 
 ## Using the glm function
 fit1 <- glm(y~duration,binomial(link="logit"),data=bank)
 summary(fit1)
 
+stargazer(fit1, fit1)
+
+## Question 4
 ## Odds for duration (note: results zoomed in on for clarity)
+png(filename = "Odds.png", width = 960, height = 960)
 odds_HH <- exp(fit1$linear.predictors)
 par(mfrow=c(1,2))
 boxplot(odds_HH,main="Odds ratio for y",ylab="Odds ratio",ylim=c(0,10))
 abline(h=1,col="red",lty=2)
 plot(bank$duration,odds_HH,main="Odds ratio to y vs duration",xlab="duration",ylab="Odds ratio",ylim=c(0,10))
 abline(h=1,col="red",lty=2)
+dev.off()
 
 ## Post fit analysis
 exb <- exp(predict(fit1,newdata=data.frame(duration=500)))
@@ -127,6 +134,9 @@ ME*(-450)
 Deltap <- predict(fit1,newdata=data.frame(duration=50),type="response")-predict(fit1,newdata=data.frame(duration=500),type="response")
 Deltap
 
+
+## Week 3
+## Question 5
 ## Changing relevant variables to factor variables
 bank$job <- as.factor(bank$job)
 bank$marital <- as.factor(bank$marital)
@@ -139,4 +149,87 @@ bank$poutcome <- as.factor(bank$poutcome)
 ## GLM with multiple predictors
 fit2 <- glm(y~age+job+marital+education+default+balance+housing+loan+duration+previous+poutcome,binomial(link="logit"),data=bank)
 summary(fit2)
+stargazer(fit2, title = "Multiple Logistic Regression")
 
+
+
+## Question 6
+## Re-leveling education
+bank$job <- relevel(bank$job, ref = "unemployed")
+fit3 <- glm(y~age+job+marital+education+default+balance+housing+loan+duration+previous+poutcome,binomial(link="logit"),data=bank)
+summary(fit3)
+
+## Adding in non-linear terms
+fit4 <- glm(y~age+job+marital+education+default+balance+I(balance^2)+housing+loan+duration+I(duration^2)+previous+poutcome+previous:housing+previous:loan,binomial(link="logit"),data=bank)
+summary(fit4)
+
+## Removing insignificant terms
+fit5 <- glm(y~job+education+default+balance+housing+loan+duration+I(duration^2)+poutcome+previous:housing,binomial(link="logit"),data=bank)
+summary(fit5)
+stargazer(fit3, fit4, fit5, title = "Model Selection")
+
+## LR Test
+LR1 <- fit5$null.deviance-fit3$deviance
+LR1_pval <- 1-pchisq(LR1,fit5$df.null-fit3$df.residual)
+LR1
+LR1_pval
+
+## Question 7
+## Hit or Miss table
+HitMiss<-function(y,prob,c){
+  HM=matrix(0,2,2)
+  HM[1,1]=mean(prob>c & y==1)
+  HM[1,2]=mean(prob>c & y==0)
+  HM[2,1]=mean(prob<=c & y==1)
+  HM[2,2]=mean(prob<=c & y==0)
+  return(HM)
+}
+
+probs1 <- fit5$fitted.values
+
+HM1 <- HitMiss(bank$y,probs1,0.5)
+
+sum(diag(HM1))
+1-sum(diag(HM1))
+
+## Precision
+precision <- HM1[1,1]/(HM1[1,1]+HM1[1,2])
+precision
+
+## Sensitivity
+sens <- HM1[1,1]/(HM1[1,1]+HM1[2,1])
+sens
+
+## Specificity
+spec <- HM1[2,2]/(HM1[2,1]+HM1[2,2])
+spec
+
+## Error rate of false negatives
+false_neg <- HM1[2,1]/(HM1[2,1]+HM1[2,2])
+false_neg
+
+## False positives
+false_pos <- HM1[1,2]/(HM1[1,1]+HM1[1,2]) 
+false_pos
+
+col1 <- (seq(0.05, 0.95, by=0.05))
+col2 <- (seq(0.05, 0.95, by=0.05))
+col3 <- (seq(0.05, 0.95, by=0.05))
+
+cutoff <- cbind(col1, col2, col3)
+
+j <- 1
+for(i in seq(0.05, 0.95, by=0.05)) {
+  HM2 <- HitMiss(bank$y,probs1,i)
+  precision1 <- HM2[1,1]/(HM2[1,1]+HM2[1,2])
+  false_neg1 <- HM2[2,1]/(HM2[2,1]+HM2[2,2])
+  false_pos1 <- HM2[1,2]/(HM2[1,1]+HM2[1,2]) 
+  cutoff[j,1] <- precision1
+  cutoff[j,2] <- false_neg1
+  cutoff[j,3] <- false_pos1
+  j <- j+1
+}
+colnames(cutoff) <- c("Precision", "False-Negatives", "False-Positives")
+rownames(cutoff) <- c(seq(0.05, 0.95, by=0.05))
+cutoff
+stargazer(cutoff)

@@ -5,12 +5,26 @@
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{longtable}
 \usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{commentgreen}{RGB}{2,112,10}
+
+\lstset{language=R,
+    basicstyle=\small\ttfamily,
+    stringstyle=\color{commentgreen},
+    otherkeywords={0,1,2,3,4,5,6,7,8,9},
+    morekeywords={TRUE,FALSE},
+    deletekeywords={data,frame,length,as,character},
+    keywordstyle=\color{blue},
+    commentstyle=\color{commentgreen},
+}
 \begin{document}
 
 \title{Syndicate 5 Statistical Learning Problem Set \#1}
 \maketitle
 \pagenumbering{gobble}
 {\setlength{\parindent}{0cm}
+
 
 
 \section*{Credit Card Balances}
@@ -251,16 +265,382 @@ F Statistic & 686.991$^{***}$ (df = 12; 387) & 806.545$^{***}$ (df = 13; 386) & 
 }
 \end{table}
 
+\subsection*{Question 4}
+There are some limitations based on our analysis:\\
+
+The linear model cannot perfectly answer this question.\\
+
+Who is the fraud for using credit card?\\
+
+In our model, Linear regressions are meant to describe linear relationships between variables. So, if there is a nonlinear relationship (student, Ethnicity,), then you will find limitations on it. However, we can sometimes do it by transforming some of the parameters with a log or squared.\\
+
+Linear regressions are sensitive to outliers. We have lots of outliers in raw data and that’s why scatter plot cannot be good fitted. I think if we can get 10X larger size then we can get a better one.\\
+
+It is easy to overfit a linear model.  When we have too many parameters compared to only 400 observations at model 1 then we are going to remove them one by one to find a more suitable one.
+
 
 \section*{Bank's Marketing Success}
-\subsection*{Question 2.1}
+\subsection*{Question 1}
 $$Pr(y_i = 1|duration_i) = \frac{\exp(\beta_0+\beta_1dist_i)}{1+\exp(\beta_0+\beta_1dist_i)}$$ 
 $$Pr(y_i = 0|duration_i) = \frac{1}{1+\exp(\beta_0+\beta_1dist_i)}$$ 
 
 
-\subsection*{Question 2.2}
+\subsection*{Question 2}
 $$\ell(\beta|\mathbf{y},\mathbf{X}) = \sum\limits_{i=1}^n \left[ y_i \ln{\left( \frac{\exp(\beta_0+\beta_1dist_i)}{1+\exp(\beta_0+\beta_1dist_i)}\right)} + (1-y_i) \ln{\left( \frac{1}{1+\exp(\beta_0+\beta_1dist_i)}\right)}\right]$$
 
 
+\subsection*{Question 3}
+The code used is provided below
+% R Output
+\begin{lstlisting}[language=R]
+## Week 2
+## Loading in the data
+bank <- read.csv("bankTD.csv", header = TRUE, sep=",")
+
+## Fitting the logistic model using MLE.
+## The likelihood function definition.
+LL_logistic<-function(beta0,beta1){
+  xb=beta0+beta1*bank$duration
+  lpy=bank$y*log(exp(xb)/(1+exp(xb)))+(1-bank$y)*log(1/(1+exp(xb)))
+  -sum(lpy)
+}
+
+## Implementing the MLE
+mle_logistic <- mle(minuslogl = LL_logistic, 
+                    start = list(beta0=0, beta1=0), method = "BFGS")
+summary(mle_logistic)
+
+## Using the glm function
+fit1 <- glm(y~duration,binomial(link="logit"),data=bank)
+summary(fit1)
+\end{lstlisting}
+
+%MLE vs GLM
+\begin{table}[H] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & \multicolumn{2}{c}{y} \\ 
+\\[-1.8ex] & (mle) & (glm)\\ 
+\hline \\[-1.8ex] 
+ duration & 0.004 & 0.004$^{***}$ \\ 
+  &  & (0.0001) \\ 
+  & & \\ 
+ Constant & $-$3.180 & $-$3.177$^{***}$ \\ 
+  &  & (0.067) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Observations &  & 6,783 \\ 
+Log Likelihood & & $-$2,084.980 \\ 
+Akaike Inf. Crit. &  & 4,173.960 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+Note that the mle() function doesn't provide statistical significance, standard errors, observations, a log likelihood or an AIC in its output.
+
+
+\subsection*{Question 4}
+The results derived by fitting the logistic model show a positive relationship between the duration of the phone call and the likelihood that a customer takes up the term deposit product offer. Also, the parameters are statistically significant. The model implies the probabilities:\\
+
+If one spends 500 seconds on the phone ($duration_i=500$):
+$$Pr(Y=1|duration_i = 500) = \frac{\exp(-3.1768+0.00354 \times 500)}{1+\exp(-3.1768+0.00354 \times 500)} = 0.590$$
+
+If someone spends 1000 seconds on the phone ($duration_i=1000$):
+$$Pr(Y=1|duration_i = 1000) = \frac{\exp(-3.1768+0.00354 \times 1000)}{1+\exp(-3.1768+0.00354 \times 1000)} = 0.197$$
+
+\includegraphics[scale=0.45]{Odds}\\
+
+Since $\beta_1$ is positive (0.00354), the odds ratio is going to increase with the duration. The below figure shows a similar tendency as predicted. Initially, we conduct odds ratio among all data, the extreme values make a vague result. Thus, we limit the range of odds ratio to (0,10) to have a clear result. The red line (Odds ratio = 1.0) is a reference indicating that the probability of subscribing to a term deposit is equal to the probability of not subscribing. Individuals with longer duration calls (more than about 900 seconds) are more likely to sign up for the term deposit.  
+
+$$Pr(Y=1|duration_i = 900) = \frac{\exp(-3.1768+0.00354 \times 900)}{1+\exp(-3.1768+0.00354 \times 900)} = 0.502$$
+$$Pr(Y=0|duration_i = 900) = \frac{1}{1+\exp(-3.1768+0.00354 \times 900)} = 0.498$$
+$$Odds_i = \frac{Pr(y_i=1|X_i)}{Pr(y_i=0|X_i)} = \frac{0.502}{0.498} = 1.008$$
+
+Also, positive $\beta_1$ implies that an increase in the duration of the call has positive impact on the propensity. The marginal effect can be calculated from:
+
+$$ME_i = \frac{\beta_1 \exp(X_i \beta)}{(1+\exp(X_i \beta))^2}$$
+
+In this part, we choose a couple of data points to illustrate the marginal effects.\\
+
+If customers spend 255 seconds (mean) on phone call:
+$$ME_i = \frac{0.00354 \exp(-3.1768 + 0.00354 \times 255)}{(1+\exp(-3.1768 + 0.00354 \times 255))^2} = 0.0003$$
+
+If customers spend 900 seconds (mean) on phone call:
+$$ME_i = \frac{0.00354 \exp(-3.1768 + 0.00354 \times 900)}{(1+\exp(-3.1768 + 0.00354 \times 900))^2} = 0.0009$$
+
+As calculated, with the increase of duration, the magnitude is larger indicating that customers’ propensity to take up the term deposit is increasing. 
+
+\subsection*{Question 5}
+Building on the model created in Section 2.3, other variables including job type, marital status, education, credit default, balance, housing, personal loan, previous contact and previous outcome information were included in the model as predictors. Using R, the following coefficients and significances were estimated.\\
+
+%Multiple Linear Regression
+\begin{longtable}{@{\extracolsep{5pt}}lc} 
+  \caption{Multiple Logistic Regression} 
+  \label{} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & y \\ 
+\hline \\[-1.8ex] 
+ age & $-$0.001 \\ 
+  & (0.005) \\ 
+  & \\ 
+ jobadmin. & 0.228 \\ 
+  & (0.266) \\ 
+  & \\ 
+ jobblue-collar & $-$0.428 \\ 
+  & (0.264) \\ 
+  & \\ 
+ jobentrepreneur & $-$1.157$^{***}$ \\ 
+  & (0.419) \\ 
+  & \\ 
+ jobhousemaid & $-$0.357 \\ 
+  & (0.375) \\ 
+  & \\ 
+ jobmanagement & $-$0.167 \\ 
+  & (0.255) \\ 
+  & \\ 
+ jobretired & 0.513$^{*}$ \\ 
+  & (0.300) \\ 
+  & \\ 
+ jobself-employed & $-$0.161 \\ 
+  & (0.333) \\ 
+  & \\ 
+ jobservices & $-$0.092 \\ 
+  & (0.286) \\ 
+  & \\ 
+ jobstudent & 0.902$^{***}$ \\ 
+  & (0.337) \\ 
+  & \\ 
+ jobtechnician & $-$0.305 \\ 
+  & (0.258) \\ 
+  & \\ 
+ jobunknown & $-$1.076 \\ 
+  & (0.804) \\ 
+  & \\ 
+ maritalmarried & $-$0.118 \\ 
+  & (0.145) \\ 
+  & \\ 
+ maritalsingle & 0.105 \\ 
+  & (0.165) \\ 
+  & \\ 
+ educationsecondary & $-$0.006 \\ 
+  & (0.159) \\ 
+  & \\ 
+ educationtertiary & 0.494$^{***}$ \\ 
+  & (0.186) \\ 
+  & \\ 
+ educationunknown & 0.179 \\ 
+  & (0.261) \\ 
+  & \\ 
+ defaultyes & $-$0.704 \\ 
+  & (0.498) \\ 
+  & \\ 
+ balance & 0.00003$^{***}$ \\ 
+  & (0.00001) \\ 
+  & \\ 
+ housingyes & $-$0.860$^{***}$ \\ 
+  & (0.099) \\ 
+  & \\ 
+ loanyes & $-$0.504$^{***}$ \\ 
+  & (0.150) \\ 
+  & \\ 
+ duration & 0.004$^{***}$ \\ 
+  & (0.0002) \\ 
+  & \\ 
+ previous & 0.047$^{**}$ \\ 
+  & (0.022) \\ 
+  & \\ 
+ poutcomeother & 0.052 \\ 
+  & (0.228) \\ 
+  & \\ 
+ poutcomesuccess & 2.263$^{***}$ \\ 
+  & (0.197) \\ 
+  & \\ 
+ poutcomeunknown & $-$0.534$^{***}$ \\ 
+  & (0.153) \\ 
+  & \\ 
+ Constant & $-$2.736$^{***}$ \\ 
+  & (0.424) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 6,783 \\ 
+Log Likelihood & $-$1,730.257 \\ 
+Akaike Inf. Crit. & 3,514.514 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{longtable} 
+
+Based on these results, age, marital and credit default were not significant in the model. Conversely, call duration and whether the customer signed up to the previous marketing campaign had a significant and positive effect on whether the customer signed up to the term deposit. Additional predictors, such as, whether the customer had a housing or personal loan with the bank had a significant negative effect i.e. if the customer had another home or personal loan with the bank, they were less likely to open a further term deposit.\\
+
+Predictors within the job and education categories had mixed results. Customers with tertiary education were significantly more likely to sign up to the term deposit compared to customers with only primary education (reference group). However, customers with secondary or unknown education were not significantly different from those with primary education only. Within the jobs category, customers that were within blue collar, technician, entrepreneur and management type roles were significantly less likely than those in admin jobs (reference group) to sign up for the term deposit. In contrast, students were significantly morel likely to open a term deposit than customers in admin jobs. All other jobs were not deemed significantly different from admin roles.\\
+
+To understand if the multiple predictor model improved upon the single predictor model from Section 2.3, the AIC values were compared. The table below summarises the deviance and AIC values for the null, single parameter and multiple parameter models. The AIC value was significantly reduced in the multiple predictor model compared to the single predictor model. This indicates that the multiple predictor model is a better predictor of whether customer will sign up for the term deposit than the single predictor model, hence is an improvement upon the single predictor model. Both multiple and single predictor models perform better than the null model based on the AIC.\\
+
+
+\subsection*{Question 6}
+%Model Selection for Bank  
+\begin{longtable}{@{\extracolsep{5pt}}lccc} 
+  \caption{Model Selection} 
+  \label{} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & \multicolumn{3}{c}{y} \\ 
+\\[-1.8ex] & (1) & (2) & (3)\\ 
+\hline \\[-1.8ex] 
+ age & $-$0.001 & 0.0003 &  \\ 
+  & (0.005) & (0.006) &  \\ 
+  & & & \\ 
+ jobadmin. & 0.228 & 0.340 & 0.348 \\ 
+  & (0.266) & (0.273) & (0.272) \\ 
+  & & & \\ 
+ jobblue-collar & $-$0.428 & $-$0.328 & $-$0.356 \\ 
+  & (0.264) & (0.269) & (0.266) \\ 
+  & & & \\ 
+ jobentrepreneur & $-$1.157$^{***}$ & $-$1.065$^{***}$ & $-$1.101$^{***}$ \\ 
+  & (0.419) & (0.413) & (0.412) \\ 
+  & & & \\ 
+ jobhousemaid & $-$0.357 & $-$0.246 & $-$0.265 \\ 
+  & (0.375) & (0.380) & (0.376) \\ 
+  & & & \\ 
+ jobmanagement & $-$0.167 & $-$0.085 & $-$0.113 \\ 
+  & (0.255) & (0.260) & (0.259) \\ 
+  & & & \\ 
+ jobretired & 0.513$^{*}$ & 0.579$^{*}$ & 0.528$^{*}$ \\ 
+  & (0.300) & (0.307) & (0.289) \\ 
+  & & & \\ 
+ jobself-employed & $-$0.161 & $-$0.002 & $-$0.019 \\ 
+  & (0.333) & (0.337) & (0.335) \\ 
+  & & & \\ 
+ jobservices & $-$0.092 & 0.067 & 0.062 \\ 
+  & (0.286) & (0.290) & (0.289) \\ 
+  & & & \\ 
+ jobstudent & 0.902$^{***}$ & 1.115$^{***}$ & 1.229$^{***}$ \\ 
+  & (0.337) & (0.348) & (0.336) \\ 
+  & & & \\ 
+ jobtechnician & $-$0.305 & $-$0.180 & $-$0.185 \\ 
+  & (0.258) & (0.264) & (0.262) \\ 
+  & & & \\ 
+ jobunknown & $-$1.076 & $-$1.164 & $-$1.208 \\ 
+  & (0.804) & (0.822) & (0.824) \\ 
+  & & & \\ 
+ maritalmarried & $-$0.118 & $-$0.094 &  \\ 
+  & (0.145) & (0.149) &  \\ 
+  & & & \\ 
+ maritalsingle & 0.105 & 0.139 &  \\ 
+  & (0.165) & (0.168) &  \\ 
+  & & & \\ 
+ educationsecondary & $-$0.006 & $-$0.004 & 0.015 \\ 
+  & (0.159) & (0.161) & (0.160) \\ 
+  & & & \\ 
+ educationtertiary & 0.494$^{***}$ & 0.524$^{***}$ & 0.569$^{***}$ \\ 
+  & (0.186) & (0.189) & (0.186) \\ 
+  & & & \\ 
+ educationunknown & 0.179 & 0.170 & 0.186 \\ 
+  & (0.261) & (0.267) & (0.267) \\ 
+  & & & \\ 
+ defaultyes & $-$0.704 & $-$0.774 & $-$0.720 \\ 
+  & (0.498) & (0.510) & (0.507) \\ 
+  & & & \\ 
+ balance & 0.00003$^{***}$ & 0.00005$^{**}$ & 0.00004$^{***}$ \\ 
+  & (0.00001) & (0.00002) & (0.00001) \\ 
+  & & & \\ 
+ I(balance$\hat{\mkern6mu}$2) &  & $-$0.000 &  \\ 
+  &  & (0.000) &  \\ 
+  & & & \\ 
+ housingyes & $-$0.860$^{***}$ & $-$0.972$^{***}$ & $-$0.974$^{***}$ \\ 
+  & (0.099) & (0.107) & (0.106) \\ 
+  & & & \\ 
+ loanyes & $-$0.504$^{***}$ & $-$0.458$^{***}$ & $-$0.507$^{***}$ \\ 
+  & (0.150) & (0.158) & (0.150) \\ 
+  & & & \\ 
+ duration & 0.004$^{***}$ & 0.007$^{***}$ & 0.007$^{***}$ \\ 
+  & (0.0002) & (0.0004) & (0.0004) \\ 
+  & & & \\ 
+ I(duration$\hat{\mkern6mu}$2) &  & $-$0.00000$^{***}$ & $-$0.00000$^{***}$ \\ 
+  &  & (0.00000) & (0.00000) \\ 
+  & & & \\ 
+ previous & 0.047$^{**}$ & $-$0.014 &  \\ 
+  & (0.022) & (0.040) &  \\ 
+  & & & \\ 
+ poutcomeother & 0.052 & 0.096 & 0.089 \\ 
+  & (0.228) & (0.237) & (0.237) \\ 
+  & & & \\ 
+ poutcomesuccess & 2.263$^{***}$ & 2.408$^{***}$ & 2.401$^{***}$ \\ 
+  & (0.197) & (0.206) & (0.206) \\ 
+  & & & \\ 
+ poutcomeunknown & $-$0.534$^{***}$ & $-$0.577$^{***}$ & $-$0.593$^{***}$ \\ 
+  & (0.153) & (0.161) & (0.159) \\ 
+  & & & \\ 
+ housingno:previous &  &  & $-$0.022 \\ 
+  &  &  & (0.039) \\ 
+  & & & \\ 
+ housingyes:previous &  & 0.093$^{**}$ & 0.069$^{***}$ \\ 
+  &  & (0.043) & (0.026) \\ 
+  & & & \\ 
+ loanyes:previous &  & $-$0.058 &  \\ 
+  &  & (0.068) &  \\ 
+  & & & \\ 
+ Constant & $-$2.736$^{***}$ & $-$3.566$^{***}$ & $-$3.543$^{***}$ \\ 
+  & (0.424) & (0.443) & (0.323) \\ 
+  & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 6,783 & 6,783 & 6,783 \\ 
+Log Likelihood & $-$1,730.257 & $-$1,652.637 & $-$1,655.544 \\ 
+Akaike Inf. Crit. & 3,514.514 & 3,367.273 & 3,363.087 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{longtable} 
+
+
+\subsection*{Question 7}
+The cut-off point in the logistic regression model represents the border of true or false predictions. Given the regression model explained before with 50\% cut-off rate, the precision of the model is 64.1\%, the error rate with false negative is 8.07\%, and the error rate of false positive is 35.9\%, as shown in the following table. 
+
+% Precision and False-Negatives
+\begin{table}[!htbp] \centering 
+  \caption{Hit and Miss Results} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}} cccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & Precision & False-Negatives & False-Positives \\ 
+\hline \\[-1.8ex] 
+0.05 & $0.241$ & $0.018$ & $0.759$ \\ 
+0.1 & $0.345$ & $0.029$ & $0.655$ \\ 
+0.15 & $0.417$ & $0.041$ & $0.583$ \\ 
+0.2 & $0.474$ & $0.048$ & $0.526$ \\ 
+0.25 & $0.510$ & $0.056$ & $0.490$ \\ 
+0.3 & $0.551$ & $0.060$ & $0.449$ \\ 
+0.35 & $0.580$ & $0.065$ & $0.420$ \\ 
+0.4 & $0.606$ & $0.071$ & $0.394$ \\ 
+0.45 & $0.635$ & $0.074$ & $0.365$ \\ 
+0.5 & $0.641$ & $0.081$ & $0.359$ \\ 
+0.55 & $0.676$ & $0.084$ & $0.324$ \\ 
+0.6 & $0.694$ & $0.090$ & $0.306$ \\ 
+0.65 & $0.709$ & $0.094$ & $0.291$ \\ 
+0.7 & $0.727$ & $0.099$ & $0.273$ \\ 
+0.75 & $0.767$ & $0.103$ & $0.233$ \\ 
+0.8 & $0.778$ & $0.106$ & $0.222$ \\ 
+0.85 & $0.800$ & $0.110$ & $0.200$ \\ 
+0.9 & $0.825$ & $0.113$ & $0.175$ \\ 
+0.95 & $0.875$ & $0.115$ & $0.125$ \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
+
+Since the cut-off rate determines the sensitivity of the model prediction, which is a trade-off between false negative and false positive, the false-negative rate will increase simultaneously with the cut-off rate, and the false-negative rate is the opposite. The precision rate will reach the peak with the cut-off rate reaches 0.45-0.5, as shown in the following table.\\
+
+The recommended cut-off rate for this model is 0.45. This model's precision reaches its peak, and the false-negative rate is also lower than choosing the 0.5 cut-off rate. It is clear that the prediction model with a 0.45 cut-off rate is more balanced and performs better.\\
 }
 \end{document}
