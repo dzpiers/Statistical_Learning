@@ -1,4 +1,4 @@
- ## Loading in packages
+## Loading in packages
 library(stargazer)
 library(forcats)
 library(MASS)

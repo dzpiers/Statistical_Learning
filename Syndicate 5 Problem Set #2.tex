@@ -1,0 +1,147 @@
+\documentclass[11pt]{article}
+\usepackage{dcolumn}
+\usepackage[left=1in, top=1in, bottom=1in]{geometry}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{commentgreen}{RGB}{2,112,10}
+
+\lstset{language=R,
+    basicstyle=\small\ttfamily,
+    stringstyle=\color{commentgreen},
+    otherkeywords={0,1,2,3,4,5,6,7,8,9},
+    morekeywords={TRUE,FALSE},
+    deletekeywords={data,frame,length,as,character},
+    keywordstyle=\color{blue},
+    commentstyle=\color{commentgreen},
+}
+\begin{document}
+
+\title{Syndicate 5 Statistical Learning Problem Set \#2}
+\maketitle
+{\setlength{\parindent}{0cm}
+
+\section*{Fishing Mode}
+\subsection*{Ordered Logit Model}
+
+%% Correlation table to confirm multicollinearity
+\begin{table}[!htbp] \centering 
+  \caption{Correlation Matrix} 
+  \label{} 
+\resizebox{15cm}{!}{
+\begin{tabular}{@{\extracolsep{5pt}} ccccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & price.beach & price.pier & price.boat & price.charter & catch.beach & catch.pier & catch.boat & catch.charter \\ 
+\hline \\[-1.8ex] 
+price.beach & $1$ & $1$ & $0.112$ & $0.141$ & $0.332$ & $0.226$ & $$-$0.098$ & $$-$0.027$ \\ 
+price.pier & $1$ & $1$ & $0.112$ & $0.141$ & $0.332$ & $0.226$ & $$-$0.098$ & $$-$0.027$ \\ 
+price.boat & $0.112$ & $0.112$ & $1$ & $0.996$ & $0.213$ & $0.253$ & $$-$0.041$ & $$-$0.023$ \\ 
+price.charter & $0.141$ & $0.141$ & $0.996$ & $1$ & $0.245$ & $0.287$ & $$-$0.063$ & $$-$0.027$ \\ 
+catch.beach & $0.332$ & $0.332$ & $0.213$ & $0.245$ & $1$ & $0.818$ & $0.139$ & $0.208$ \\ 
+catch.pier & $0.226$ & $0.226$ & $0.253$ & $0.287$ & $0.818$ & $1$ & $0.134$ & $0.187$ \\ 
+catch.boat & $$-$0.098$ & $$-$0.098$ & $$-$0.041$ & $$-$0.063$ & $0.139$ & $0.134$ & $1$ & $0.936$ \\ 
+catch.charter & $$-$0.027$ & $$-$0.027$ & $$-$0.023$ & $$-$0.027$ & $0.208$ & $0.187$ & $0.936$ & $1$ \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+}
+\end{table} 
+
+%% Ordered Logit Model
+\begin{table}[H] \centering 
+  \caption{Ordered Logit Model} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & mode \\ 
+\hline \\[-1.8ex] 
+ price.pier & 0.006$^{***}$ \\ 
+  & (0.001) \\ 
+  & \\ 
+ price.boat & $-$0.125$^{***}$ \\ 
+  & (0.014) \\ 
+  & \\ 
+ price.charter & 0.115$^{***}$ \\ 
+  & (0.014) \\ 
+  & \\ 
+ catch.beach & 0.653 \\ 
+  & (0.619) \\ 
+  & \\ 
+ catch.pier & $-$4.061$^{***}$ \\ 
+  & (0.756) \\ 
+  & \\ 
+ catch.boat & 0.907 \\ 
+  & (0.928) \\ 
+  & \\ 
+ catch.charter & 0.199 \\ 
+  & (0.266) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 1,182 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+
+\subsection*{Multinomial Logit Model}
+\subsubsection*{Question 1}
+
+%% Multinomial Logit Model
+\begin{table}[!htbp] \centering 
+  \caption{Multinomial Logit Model} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}} cccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & Boat & Charter & Pier \\ 
+\hline \\[-1.8ex] 
+(Intercept) & $$-$13.429^{***}$ & $$-$16.149^{***}$ & $$-$7.179^{**}$ \\ 
+price.pier & $0.032^{***}$ & $0.027^{***}$ & $$-$0.005$ \\ 
+price.boat & $$-$0.579^{***}$ & $$-$0.670^{***}$ & $$-$0.321^{***}$ \\ 
+price.charter & $0.556^{***}$ & $0.652^{***}$ & $0.320^{***}$ \\ 
+catch.beach & $58.579^{***}$ & $60.639^{***}$ & $37.511^{***}$ \\ 
+catch.pier & $$-$86.664^{***}$ & $$-$86.885^{***}$ & $$-$51.327^{***}$ \\ 
+catch.boat & $$-$0.521$ & $0.368$ & $$-$1.784$ \\ 
+catch.charter & $0.306$ & $0.119$ & $0.100$ \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
+
+%% AIC
+\begin{table}[!htbp] \centering 
+  \caption{AIC for Multinomial Logit Model} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}} c} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+$2,181.346$ \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
+
+\subsubsection*{Question 2}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+\end{document}
