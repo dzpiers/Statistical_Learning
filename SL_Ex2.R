@@ -139,6 +139,7 @@ fit_m1 <- mlogit(mode~0|price.pier+price.boat+price.charter+catch.beach+catch.pi
 summary(fit_m1)
 AIC(fit_m1)
 
+
 ## Putting it into a more readable table
 table_m1 <- matrix(unlist(fit_m1$coefficients), nrow=8, ncol=3, byrow=TRUE)
 colnames(table_m1) <- c("Boat", "Charter", "Pier")
@@ -147,11 +148,13 @@ table_m1
 stargazer(table_m1, title = "Multinomial Logit Model")
 stargazer(AIC(fit_m1), title = "AIC for Multinomial Logit Model")
 
+
 ## Odds ratio
 prob_m1 <- fit_m1$probabilities
 odds_bb <- prob_m1[,2]/prob_m1[,1]
 odds_cb <- prob_m1[,3]/prob_m1[,1]
 odds_pb <- prob_m1[,4]/prob_m1[,1]
+
 
 png("Unordered Odds 1.png", width = 960, height = 480)
 par(mfrow=c(1,3))
@@ -163,24 +166,39 @@ boxplot(odds_pb, main="Odds Pier vs Beach",ylim=c(0, 1200))
 abline(h=1.0,col="red")
 dev.off()
 
-## Odds vs price.boat
-png("Unordered Odds 2.png", width = 960, height = 480)
-par(mfrow=c(1,3))
-plot(fishing$price.boat, odds_bb,main="Odds ratio - Boat/Beach", ylab="Odds", xlab="catch.pier",  ylim=c(0, 5))
-abline(h=1.0,col="red")
-plot(fishing$price.boat, odds_cb,main="Odds ratio - Charter/Beach", ylab="Odds", xlab="catch.pier", ylim=c(0, 5))
-abline(h=1.0,col="red")
-plot(fishing$price.boat, odds_pb,main="Odds ratio - Pier/Beach", ylab="Odds", xlab="catch.pier",  ylim=c(0, 5))
-abline(h=1.0,col="red")
+
+#Plotting Odds Sensitivity to price of Boat&Charter
+png("Unordered Odds 2.png", width = 960, height = 960)
+par(mfrow=c(3, 3))
+plot(fishing$price.boat,odds_bb*fit_m1$coefficients["price.boat:boat"],main="Odds sensitivity: Boat/Beach",
+     ylab="Sensitivity",xlab="Price of Boat",ylim=c(-1000,1000))
+plot(fishing$price.boat,odds_cb*fit_m1$coefficients["price.boat:charter"],main="Odds sensitivity: Charter/Beach",
+     ylab="Sensitivity",xlab="Price of Boat",ylim=c(-1000,1000))
+plot(fishing$price.boat,odds_cb*fit_m1$coefficients["price.boat:pier"],main="Odds sensitivity: Pier/Beach",
+     ylab="Sensitivity",xlab="Price of Boat",ylim=c(-1000,1000))
+plot(fishing$price.charter,odds_bb*fit_m1$coefficients["price.charter:boat"],main="Odds sensitivity: Boat/Beach",
+     ylab="Sensitivity",xlab="Price of Charter",ylim=c(-1000,1000))
+plot(fishing$price.charter,odds_cb*fit_m1$coefficients["price.charter:charter"],main="Odds sensitivity: Charter/Beach",
+     ylab="Sensitivity",xlab="Price of Charter",ylim=c(-1000,1000))
+plot(fishing$price.charter,odds_cb*fit_m1$coefficients["price.boat:pier"],main="Odds sensitivity: Pier/Beach",
+     ylab="Sensitivity",xlab="Price of Boat",ylim=c(-1000,1000))
+plot(fishing$price.pier,odds_bb*fit_m1$coefficients["price.pier:boat"],main="Odds sensitivity: Boat/Beach",
+     ylab="Sensitivity",xlab="Price of Pier",ylim=c(-1000,1000))
+plot(fishing$price.pier,odds_cb*fit_m1$coefficients["price.pier:charter"],main="Odds sensitivity: Charter/Beach",
+     ylab="Sensitivity",xlab="Price of Pier",ylim=c(-1000,1000))
+plot(fishing$price.pier,odds_cb*fit_m1$coefficients["price.boat:pier"],main="Odds sensitivity: Pier/Beach",
+     ylab="Sensitivity",xlab="Price of Boat",ylim=c(-1000,1000))
 dev.off()
 
-## Odds vs price.charter
-png("Unordered Odds 3.png", width = 960, height = 480)
-par(mfrow=c(1,3))
-plot(fishing$price.charter, odds_bb,main="Odds ratio - Boat/Beach", ylab="Odds", xlab="catch.charter",  ylim=c(0, 5))
-abline(h=1.0,col="red")
-plot(fishing$price.charter, odds_cb,main="Odds ratio - Charter/Beach", ylab="Odds", xlab="catch.charter", ylim=c(0, 5))
-abline(h=1.0,col="red")
-plot(fishing$price.charter, odds_pb,main="Odds ratio - Pier/Beach", ylab="Odds", xlab="catch.charter",  ylim=c(0, 5))
-abline(h=1.0,col="red")
-dev.off()
+
+## Hit or miss table
+## Checking levels align
+ychoice <- factor(fishing$mode, levels = c("beach", "boat", "charter", "pier"))
+levels(ychoice) 
+colnames(prob_m1) 
+HM_m1 <- HitMissMult(as.numeric(ychoice),prob_m1)
+## Rename columns and rows for ease of use
+colnames(HM_m1) <- colnames(prob_m1)
+rownames <- colnames(prob_m1)
+HM_m1
+sum(diag(HM_m1))
