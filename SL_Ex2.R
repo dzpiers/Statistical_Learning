@@ -184,3 +184,16 @@ abline(h=1.0,col="red")
 plot(fishing$price.charter, odds_pb,main="Odds ratio - Pier/Beach", ylab="Odds", xlab="catch.charter",  ylim=c(0, 5))
 abline(h=1.0,col="red")
 dev.off()
+
+## Hit or miss table
+## Checking levels align
+ychoice <- factor(fishing$mode, levels = c("beach", "boat", "charter", "pier"))
+levels(ychoice) 
+colnames(prob_m1) 
+
+HM_m1 <- HitMissMult(as.numeric(ychoice),prob_m1)
+## Rename columns and rows for ease of use
+colnames(HM_m1) <- colnames(prob_m1)
+rownames <- colnames(prob_m1)
+HM_m1
+sum(diag(HM_m1))
