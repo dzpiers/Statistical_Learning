@@ -196,6 +196,8 @@ dev.off()
 ychoice <- factor(fishing$mode, levels = c("beach", "boat", "charter", "pier"))
 levels(ychoice) 
 colnames(prob_m1) 
+
+
 HM_m1 <- HitMissMult(as.numeric(ychoice),prob_m1)
 ## Rename columns and rows for ease of use
 colnames(HM_m1) <- colnames(prob_m1)
