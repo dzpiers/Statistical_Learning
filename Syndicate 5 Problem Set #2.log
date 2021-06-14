@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.5.17)  13 JUN 2021 19:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.5.17)  14 JUN 2021 18:30
 entering extended mode
 **"./Syndicate 5 Problem Set #2.tex"
 ("Syndicate 5 Problem Set #2.tex"
@@ -252,6 +252,12 @@ LaTeX Warning: Label `' multiply defined.
 
 LaTeX Warning: Label `' multiply defined.
 
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
 )
 \openout1 = `"Syndicate 5 Problem Set #2.aux"'.
 
@@ -344,14 +350,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 33--34
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 58--59
+Underfull \hbox (badness 10000) in paragraph at lines 36--37
 
  []
 
-[1
 
-{C:/Users/dhruv/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-Overfull \hbox (13.7394pt too wide) in paragraph at lines 67--68
+Overfull \hbox (13.7394pt too wide) in paragraph at lines 45--47
 []$\OML/cmm/m/it/12 z[] \OT1/cmr/m/n/12 = 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 00
 59\OML/cmm/m/it/12 Price:Pier[] \OMS/cmsy/m/n/12   \OT1/cmr/m/n/12 0\OML/cmm/m/
 it/12 :\OT1/cmr/m/n/12 1246\OML/cmm/m/it/12 Price:Boat[] \OT1/cmr/m/n/12 + 0\OM
@@ -361,100 +365,186 @@ MS/cmsy/m/n/12  
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 67--68
+Underfull \hbox (badness 10000) in paragraph at lines 45--47
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 48--49
+
+ []
+
+[1
+
+{C:/Users/dhruv/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 50--51
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--56
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 113--114
+Underfull \hbox (badness 10000) in paragraph at lines 68--69
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 70--71
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 72--73
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
 
  []
 
 [3]
-<Ordered Odds 1.png, id=20, 963.6pt x 481.8pt>
-File: Ordered Odds 1.png Graphic file (type png)
-<use Ordered Odds 1.png>
-Package pdftex.def Info: Ordered Odds 1.png  used on input line 115.
-(pdftex.def)             Requested size: 481.79883pt x 240.8994pt.
-
-Overfull \hbox (31.919pt too wide) in paragraph at lines 115--116
-[][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 115--116
+Underfull \hbox (badness 10000) in paragraph at lines 81--82
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 117--118
+Underfull \hbox (badness 10000) in paragraph at lines 83--84
 
  []
 
-<Ordered Odds 2.png, id=21, 963.6pt x 963.6pt>
-File: Ordered Odds 2.png Graphic file (type png)
-<use Ordered Odds 2.png>
-Package pdftex.def Info: Ordered Odds 2.png  used on input line 119.
-(pdftex.def)             Requested size: 481.79883pt x 481.79883pt.
-<Ordered Odds 3.png, id=22, 963.6pt x 481.8pt>
-File: Ordered Odds 3.png Graphic file (type png)
-<use Ordered Odds 3.png>
-Package pdftex.def Info: Ordered Odds 3.png  used on input line 120.
-(pdftex.def)             Requested size: 481.79883pt x 240.8994pt.
 
-Overfull \hbox (31.919pt too wide) in paragraph at lines 119--121
-[][] 
+Underfull \hbox (badness 10000) in paragraph at lines 85--86
+
  []
 
 
-Overfull \hbox (31.919pt too wide) in paragraph at lines 119--121
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
+
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 93--94
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 95--96
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--100
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--102
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
+
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 109--110
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 111--112
+
+ []
+
+
+Overfull \hbox (25.18568pt too wide) in paragraph at lines 187--187
+ [][] 
+ []
+
+[6]
+Overfull \hbox (25.17775pt too wide) in paragraph at lines 259--259
+ [][] 
+ []
+
+
+Overfull \hbox (25.17953pt too wide) in paragraph at lines 297--297
+ [][] 
+ []
+
+[7]
+<Unordered Odds 1.png, id=35, 963.6pt x 321.2pt>
+File: Unordered Odds 1.png Graphic file (type png)
+<use Unordered Odds 1.png>
+Package pdftex.def Info: Unordered Odds 1.png  used on input line 301.
+(pdftex.def)             Requested size: 481.79883pt x 160.59961pt.
+
+Overfull \hbox (31.919pt too wide) in paragraph at lines 300--302
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--121
+Underfull \hbox (badness 10000) in paragraph at lines 300--302
 
  []
 
-[4 <./Ordered Odds 1.png>] [5 <./Ordered Odds 2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 164--165
+[8 <./Unordered Odds 1.png>]
+<Ordered Odds 3.png, id=40, 963.6pt x 321.2pt>
+File: Ordered Odds 3.png Graphic file (type png)
+<use Ordered Odds 3.png>
+Package pdftex.def Info: Ordered Odds 3.png  used on input line 358.
+(pdftex.def)             Requested size: 452.89207pt x 150.96402pt.
+<Ordered Odds 2.png, id=41, 963.6pt x 963.6pt>
+File: Ordered Odds 2.png Graphic file (type png)
+<use Ordered Odds 2.png>
+Package pdftex.def Info: Ordered Odds 2.png  used on input line 359.
+(pdftex.def)             Requested size: 452.89207pt x 452.89207pt.
+
+Overfull \hbox (3.01225pt too wide) in paragraph at lines 357--361
+[] 
+ []
+
+
+Overfull \hbox (3.01225pt too wide) in paragraph at lines 357--361
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 357--361
 
  []
 
-[6 <./Ordered Odds 3.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 166--167
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 168--169
-
- []
-
-[7] ("Syndicate 5 Problem Set #2.aux")
+[9] [10 <./Ordered Odds 3.png> <./Ordered Odds 2.png>]
+("Syndicate 5 Problem Set #2.aux")
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5048 strings out of 479624
- 68193 string characters out of 2875023
- 551713 words of memory out of 3000000
- 22154 multiletter control sequences out of 15000+200000
- 412540 words of font info for 62 fonts, out of 3000000 for 9000
+ 5051 strings out of 479624
+ 68245 string characters out of 2875023
+ 577713 words of memory out of 3000000
+ 22156 multiletter control sequences out of 15000+200000
+ 412877 words of font info for 63 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,11n,70p,1325b,275s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Progra
-m Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKT
-eX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX/fonts/typ
-e1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr1
-7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Pr
-ogram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/M
-iKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on "Syndicate 5 Problem Set #2.pdf" (7 pages, 148172 bytes).
+ 66i,15n,70p,1253b,312s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\dhruv\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
+1200.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/
+Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program File
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/c
+m/cmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C
+:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Fi
+les/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on "Syndicate 5 Problem Set #2.pdf" (10 pages, 172320 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
+ 86 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -50,13 +50,13 @@ odds_pier_beach <- fit_olog1$fitted.values[,2]/fit_olog1$fitted.values[,1]
 odds_boat_pier <- fit_olog1$fitted.values[,3]/fit_olog1$fitted.values[,2]
 odds_charter_boat <- fit_olog1$fitted.values[,4]/fit_olog1$fitted.values[,3]
 
-png("Ordered Odds 1.png", width = 960, height = 480)
+png("Ordered Odds 1.png", width = 960, height = 320)
 par(mfrow=c(1,3))
-boxplot(odds_pier_beach,main="Odds ratio - Pier/Beach", ylim=c(min(0.5,min(odds_charter_boat)),max(1.5,max(odds_charter_boat))))
+boxplot(odds_pier_beach,main="Odds ratio - Pier/Beach", ylim=c(0, 7), cex.lab=1.5, cex.axis=1.5, cex.main=1.5)
 abline(h=1.0,col="red")
-boxplot(odds_boat_pier,main="Odds ratio - Boat/Pier", ylim=c(min(0.5,min(odds_charter_boat)),max(1.5,max(odds_charter_boat))))
+boxplot(odds_boat_pier,main="Odds ratio - Boat/Pier", ylim=c(0, 7), cex.lab=1.5, cex.axis=1.5, cex.main=1.5)
 abline(h=1.0,col="red")
-boxplot(odds_charter_boat,main="Odds ratio - Charter/Boat")
+boxplot(odds_charter_boat,main="Odds ratio - Charter/Boat", ylim=c(0, 7), cex.lab=1.5, cex.axis=1.5, cex.main=1.5)
 abline(h=1.0,col="red")
 dev.off()
 
@@ -90,13 +90,13 @@ abline(h=1.0,col="red")
 dev.off()
 
 ## Odds vs catch.pier
-png("Ordered Odds 3.png", width = 960, height = 480)
+png("Ordered Odds 3.png", width = 960, height = 320)
 par(mfrow=c(1,3))
-plot(fishing$catch.pier,odds_pier_beach,main="Odds ratio - Pier/Beach",ylab="Odds",xlab="catch.pier")
+plot(fishing$catch.pier,odds_pier_beach,main="Odds ratio - Pier/Beach",ylab="Odds",xlab="catch.pier", ylim=c(0, 6), cex.lab=1.5, cex.axis=1.5, cex.main=1.5)
 abline(h=1.0,col="red")
-plot(fishing$catch.pier,odds_boat_pier,main="Odds ratio - Boat/Pier",ylab="Odds",xlab="catch.pier",ylim=c(min(0.5,min(odds32)),max(1.1,max(odds32))))
+plot(fishing$catch.pier,odds_boat_pier,main="Odds ratio - Boat/Pier",ylab="Odds",xlab="catch.pier",ylim=c(0, 6), cex.main=1.5, cex.lab=1.5, cex.axis=1.5)
 abline(h=1.0,col="red")
-plot(fishing$catch.pier,odds_charter_boat,main="Odds ratio - Charter/Boat",ylab="Odds",xlab="catch.pier",ylim=c(min(0.5,min(odds43)),6))
+plot(fishing$catch.pier,odds_charter_boat,main="Odds ratio - Charter/Boat",ylab="Odds",xlab="catch.pier",ylim=c(0, 6), cex.lab=1.5, cex.axis=1.5, cex.main=1.5)
 abline(h=1.0,col="red")
 dev.off()
 
@@ -155,14 +155,14 @@ odds_bb <- prob_m1[,2]/prob_m1[,1]
 odds_cb <- prob_m1[,3]/prob_m1[,1]
 odds_pb <- prob_m1[,4]/prob_m1[,1]
 
-
-png("Unordered Odds 1.png", width = 960, height = 480)
+## Plotting unordered odds ratios
+png("Unordered Odds 1.png", width = 960, height = 320)
 par(mfrow=c(1,3))
-boxplot(odds_bb, main="Odds Boat vs Beach",ylim=c(0, 1200))
+boxplot(odds_bb, main="Odds Boat vs Beach",ylim=c(0, 1200), cex.lab=1.5, cex.axis=1.5, cex.main=1.5)
 abline(h=1.0,col="red")
-boxplot(odds_cb, main="Odds Charter vs Beach",ylim=c(0, 1200))
+boxplot(odds_cb, main="Odds Charter vs Beach",ylim=c(0, 1200), cex.lab=1.5, cex.axis=1.5, cex.main=1.5)
 abline(h=1.0,col="red")
-boxplot(odds_pb, main="Odds Pier vs Beach",ylim=c(0, 1200))
+boxplot(odds_pb, main="Odds Pier vs Beach",ylim=c(0, 1200), cex.lab=1.5, cex.axis=1.5, cex.main=1.5)
 abline(h=1.0,col="red")
 dev.off()
 
@@ -190,6 +190,11 @@ plot(fishing$price.pier,odds_cb*fit_m1$coefficients["price.boat:pier"],main="Odd
      ylab="Sensitivity",xlab="Price of Boat",ylim=c(-1000,1000))
 dev.off()
 
+## Pier odds zoomed in
+png("Unordered Odds 3.png", width = 480, height = 480)
+boxplot(odds_pb, main="Odds Pier vs Beach",ylim=c(0, 20), cex.lab=1.5, cex.axis=1.5, cex.main=1.5)
+abline(h=1.0,col="red")
+dev.off()
 
 ## Hit or miss table
 ## Checking levels align
