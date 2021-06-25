@@ -1,0 +1,9 @@
+"hiv.csv" data description
+Column	Variable name	Description
+A	pid		Patient ID code		
+B	CD4PCT		CD4 percentage
+C	treatment	indicator variable for treatment
+			= 0 to indicates control group
+			= 1 to indicates zinc treatment group
+D	baseage		age of child in years at initial visit
+E	time		time in years from the initial visit 
