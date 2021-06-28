@@ -64,10 +64,15 @@ fithiv2_alpha<-data.frame(x=1:226,est=fithiv2_a,
 q2 <- ggplot(fithiv2_alpha, aes(x = x, y = est)) +
   geom_point(size = 1) +
   geom_errorbar(aes(ymax = U, ymin = L)) +
-  ggtitle("Baseline variation across group - varies with treatment") +
-  xlab("sick kiddos") +
+  ggtitle("Baseline variation across group - varies with treatment and baseage") +
+  xlab("Patiend ID") +
   ylab("Intercept") +
+  theme_classic(base_size = 15) +
   geom_point(aes(x=x,y=fixed),size=1,colour="red")
+
+png(filename = "Q2.png", width = 720, height = 480)
+q2
+dev.off()
 
 grid.arrange(q1, q2)
 
@@ -81,3 +86,6 @@ summary(hivlinear)
 AIC(fithiv1)
 AIC(fithiv2)
 AIC(hivlinear)
+
+#Stargazer output
+stargazer(fithiv1, fithiv2, hivlinear)
