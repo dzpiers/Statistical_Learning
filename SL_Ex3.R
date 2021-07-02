@@ -11,9 +11,10 @@ library(VGAM)
 library(lme4)
 library(ggplot2)
 library(gridExtra)
+library(flexmix)
 
 options(scipen=2)
-
+set.seed(100)
 
 #Week 6
 #Loading in data
@@ -38,9 +39,14 @@ q1 <- ggplot(fithiv1_alpha, aes(x = x, y = est)) +
   geom_point(size = 1) +
   geom_hline(aes(yintercept=fixed),colour="red")+
   geom_errorbar(aes(ymax = U, ymin = L)) +
-  ggtitle("Sick kids") +
-  xlab("Kid number") +
-  ylab("Intercept")
+  ggtitle("Baseline variation across group") +
+  xlab("Patient ID") +
+  ylab("Intercept") +
+  theme_classic(base_size = 15)
+
+png(filename = "Q1.png", width = 720, height = 480)
+q1
+dev.off()
 
 
 #Question 2
@@ -65,7 +71,7 @@ q2 <- ggplot(fithiv2_alpha, aes(x = x, y = est)) +
   geom_point(size = 1) +
   geom_errorbar(aes(ymax = U, ymin = L)) +
   ggtitle("Baseline variation across group - varies with treatment and baseage") +
-  xlab("Patiend ID") +
+  xlab("Patient ID") +
   ylab("Intercept") +
   theme_classic(base_size = 15) +
   geom_point(aes(x=x,y=fixed),size=1,colour="red")
@@ -89,3 +95,28 @@ AIC(hivlinear)
 
 #Stargazer output
 stargazer(fithiv1, fithiv2, hivlinear)
+
+
+#Week 7
+credit <- read.csv("credit.csv", header = TRUE, sep=",")
+
+#Latent mixture model
+simcreditfit <- stepFlexmix(Balance~Income+Rating+Cards+Age+Education+Student+Married+Gender+Ethnicity,k=1:5,data=credit)
+simcreditfit
+stargazer(simcreditfit)
+
+sfit1 <- flexmix(Balance~Income+Rating+Cards+Age+Education+Student+Married+Gender+Ethnicity,k=2,data=credit)
+print(sfit1)
+sfit1@cluster
+parameters(sfit1)
+AIC(sfit1)
+
+stargazer(parameters(sfit1))
+
+#Extracting more statistics
+sfit1.refit <- refit(sfit1)
+summary(sfit1.refit) #viewing the refitted object
+sfit1.refit@vcov
+plot(sfit1)
+
+

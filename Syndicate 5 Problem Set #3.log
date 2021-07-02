@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.5.17)  28 JUN 2021 16:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.5.17)  2 JUL 2021 19:08
 entering extended mode
 **"./Syndicate 5 Problem Set #3.tex"
 ("Syndicate 5 Problem Set #3.tex"
@@ -242,7 +242,26 @@ File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
 \l__kernel_color_stack_int=\count281
 \l__pdf_internal_box=\box59
 )
-("Syndicate 5 Problem Set #3.aux")
+("Syndicate 5 Problem Set #3.aux"
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+)
 \openout1 = `"Syndicate 5 Problem Set #3.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
@@ -328,39 +347,129 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 LaTeX Warning: No \author given.
 
-[1
 
-{C:/Users/dhruv/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 60--61
+Underfull \hbox (badness 10000) in paragraph at lines 39--40
 
  []
 
-<Q2.png, id=12, 722.7pt x 481.8pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--43
+
+ []
+
+[1
+
+{C:/Users/dhruv/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 53--54
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--62
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 63--64
+
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 65--66
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--68
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--70
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 74--75
+
+ []
+
+[3] [4]
+Underfull \hbox (badness 10000) in paragraph at lines 153--154
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 155--156
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 157--158
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 159--160
+
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 163--164
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 165--166
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 167--168
+
+ []
+
+<Q1.png, id=27, 722.7pt x 481.8pt>
+File: Q1.png Graphic file (type png)
+<use Q1.png>
+Package pdftex.def Info: Q1.png  used on input line 176.
+(pdftex.def)             Requested size: 433.62334pt x 289.08221pt.
+<Q2.png, id=28, 722.7pt x 481.8pt>
 File: Q2.png Graphic file (type png)
 <use Q2.png>
-Package pdftex.def Info: Q2.png  used on input line 62.
+Package pdftex.def Info: Q2.png  used on input line 178.
 (pdftex.def)             Requested size: 433.62334pt x 289.08221pt.
-[2 <./Q2.png>] [3] ("Syndicate 5 Problem Set #3.aux") ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 175--179
+
+ []
+
+[6] [7 <./Q1.png> <./Q2.png>] [8] [9] [10] ("Syndicate 5 Problem Set #3.aux")
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 5029 strings out of 479624
- 67747 string characters out of 2875023
- 549713 words of memory out of 3000000
- 22138 multiletter control sequences out of 15000+200000
- 412233 words of font info for 61 fonts, out of 3000000 for 9000
+ 5042 strings out of 479624
+ 67878 string characters out of 2875023
+ 556713 words of memory out of 3000000
+ 22149 multiletter control sequences out of 15000+200000
+ 413236 words of font info for 64 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,11n,70p,727b,285s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX
-/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1
-/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsf
-onts/cm/cmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12
-.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Prog
-ram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKT
-eX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/typ
-e1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmti12.pfb>
-Output written on "Syndicate 5 Problem Set #3.pdf" (3 pages, 119567 bytes).
+ 66i,13n,70p,841b,308s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\dhruv\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
+1200.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/
+Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Program Fi
+les/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX/f
+onts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts
+/cm/cmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb>
+<C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program 
+Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX/
+fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on "Syndicate 5 Problem Set #3.pdf" (10 pages, 155636 bytes).
 PDF statistics:
- 50 PDF objects out of 1000 (max. 8388607)
+ 84 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
