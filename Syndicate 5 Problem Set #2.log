@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.5.17)  14 JUN 2021 18:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2021.5.17)  23 JUL 2021 16:36
 entering extended mode
 **"./Syndicate 5 Problem Set #2.tex"
 ("Syndicate 5 Problem Set #2.tex"
@@ -504,18 +504,13 @@ File: Ordered Odds 2.png Graphic file (type png)
 Package pdftex.def Info: Ordered Odds 2.png  used on input line 359.
 (pdftex.def)             Requested size: 452.89207pt x 452.89207pt.
 
-Overfull \hbox (3.01225pt too wide) in paragraph at lines 357--361
+Overfull \hbox (3.01225pt too wide) in paragraph at lines 357--360
 [] 
  []
 
 
-Overfull \hbox (3.01225pt too wide) in paragraph at lines 357--361
-[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 357--361
-
+Overfull \hbox (3.01225pt too wide) in paragraph at lines 357--360
+[] 
  []
 
 [9] [10 <./Ordered Odds 3.png> <./Ordered Odds 2.png>]
@@ -542,7 +537,7 @@ m/cmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C
 :/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Fi
 les/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX/fo
 nts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on "Syndicate 5 Problem Set #2.pdf" (10 pages, 172320 bytes).
+Output written on "Syndicate 5 Problem Set #2.pdf" (10 pages, 172321 bytes).
 PDF statistics:
  86 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
